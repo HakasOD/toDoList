@@ -1,14 +1,13 @@
-import loadImages from "./js/navDisplay";
-import Task from "./js/Task";
+import loadImages from "./js/dom/navDisplay";
+import Task from "./js/lists/Task";
+import List from "./js/lists/List";
 
 import "./css/general.css";
 import "./css/nav.css";
 import "./css/sidebar.css";
 
-let hi = new Task("whoa")
-console.log(hi.discription);
-hi.title = "s";
-console.log(hi.title)
-console.log('soas');
+console.log("hi")
 
+let wow = new Task("wow");
+console.log(wow.id);
 loadImages();

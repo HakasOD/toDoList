@@ -1,5 +1,8 @@
+import { v4 as uuidv4 } from "uuid";
+
 class Task {
-    #title;
+    #id;
+    #title = null;
     #discription = null;
     #dueDate = null;
     #location = null;
@@ -8,8 +11,13 @@ class Task {
 
     constructor(title) {
         this.#title = title;
+        this.#id = uuidv4();
     }
 
+    get id() {
+        return this.#id;
+    }
+    
     get title() {
         return this.#title;
     }
@@ -36,10 +44,10 @@ class Task {
 
     set title(title) {
         if(title.length > 0) {
-            this.#title = title;
-        } else {
             console.error("Title must be at least 1 character");
         }
+
+        this.#title = title;        
     }
 
     set discription(discription) {

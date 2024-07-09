@@ -1,9 +1,9 @@
 import createImgFromUrl from "./assetManager";
 
-import iconSunSrc from "../assets/images/icons/light-mode-sun.svg";
-import iconMoonSrc from "../assets/images/icons/dark-mode-moon.svg";
-import iconQuestionMarkSrc from "../assets/images/icons/question-mark.svg";
-import iconMenuSrc from "../assets/images/icons/menu.svg";
+import iconSunSrc from "../../assets/images/icons/light-mode-sun.svg";
+import iconMoonSrc from "../../assets/images/icons/dark-mode-moon.svg";
+import iconQuestionMarkSrc from "../../assets/images/icons/question-mark.svg";
+import iconMenuSrc from "../../assets/images/icons/menu.svg";
 
 function loadImages(){
     loadRightNavImages();
