@@ -1,13 +1,16 @@
-import loadImages from "./js/dom/navDisplay";
-import Task from "./js/lists/Task";
+import loadImages from "./js/dom/nav";
+import Task from "./js/tasks/Task";
 import List from "./js/lists/List";
+import defaultLists from "./js/lists/DefaultLists";
 
 import "./css/general.css";
 import "./css/nav.css";
 import "./css/sidebar.css";
 
-console.log("hi")
 
-let wow = new Task("wow");
-console.log(wow.id);
+console.log(defaultLists)
+
+
+
+
 loadImages();

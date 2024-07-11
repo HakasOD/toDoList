@@ -43,8 +43,9 @@ class Task {
     }
 
     set title(title) {
-        if(title.length > 0) {
+        if(title.length < 1) {
             console.error("Title must be at least 1 character");
+            return
         }
 
         this.#title = title;        
@@ -55,6 +56,10 @@ class Task {
     }
 
     set dueDate(dueDate) {
+        if(dueDate !== null && !(dueDate instanceof Date)) {
+            console.error("Due date must either be null or a Date object");
+        }
+
         this.#dueDate = dueDate;
     }
 
