@@ -13,6 +13,11 @@ class TodayList extends List {
             return taskDayDue === today;
         })
     }
+
+
+    set tasks(tasks) {
+        this._tasks = tasks
+    }
 }
 
 class UpcomingList extends List {
@@ -32,12 +37,18 @@ class UpcomingList extends List {
             return taskDueDate >= today && taskDueDate <= weekFromToday;
         })
     }
+
+    set tasks(tasks) {
+        this._tasks = tasks
+    }
 }
 
 class AllTasksList extends List {
     constructor(tasks = []) {
         super("All Tasks", tasks);
     }
+
+    
 }
 
 class InboxList extends List {
@@ -48,7 +59,12 @@ class InboxList extends List {
     }
 
     get tasks() {
-        return this.tasks.filter(task => this.userLists.includes(task));
+        return this.tasks.filter(task => !(this.userLists.includes(task)));
+    }
+
+
+    set tasks(tasks) {
+        this._tasks = tasks
     }
 }
 

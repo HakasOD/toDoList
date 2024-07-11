@@ -1,21 +1,22 @@
 import Task from "./Task";
+import defaultLists from "../lists/DefaultLists";
 
-const tasks = [];
+let allTasks = [];
 
 function getTasks() {
-    return tasks;
+    return allTasks;
 }
 
 function getActiveTasks() {
-    return tasks.filter(task => !task.isCompleted); 
+    return allTasks.filter(task => !task.isCompleted); 
 }
 
 function getCompletedTasks() {
-    return tasks.filter(task => task.isCompleted);
+    return allTasks.filter(task => task.isCompleted);
 }
 
 function getTaskById(id) {
-    const task = tasks.find(task => task.id === id);
+    const task = allTasks.find(task => task.id === id);
 
     if(task === undefined) {
         console.error(`Task with id ${id} not found`);
@@ -68,26 +69,40 @@ function setPriority(priority, id) {
 }
 
 function toggleIsCompleted(id) {
-    getTaskById(id).toggleIsCompleted;
+    getTaskById(id).toggleIsCompleted();
 }
 
 // Task Manegement
 function createTask(title) {
     const task = new Task(title);
 
-    tasks.push(task);
+    allTasks.push(task);
+
+    updateDefaultLists();
 }
 
 function deleteTask(id) {
-    for(let i = 0; i < tasks.length; i++) {
-        if(tasks[i].id === id) {
-            tasks.splice(i, 1);
+    for(let i = 0; i < allTasks.length; i++) {
+        if(allTasks[i].id === id) {
+            allTasks.splice(i, 1);
         }
     }
+
+    updateDefaultLists();
 }
 
 function deleteCompletedTasks() {
-    tasks = tasks.filter(task => !task.isCompleted);
+    allTasks = allTasks.filter(task => !task.isCompleted);
+
+    updateDefaultLists();
+}
+
+// Default list management
+function updateDefaultLists() {
+    defaultLists.today.tasks = allTasks;
+    defaultLists.upcoming.tasks = allTasks;
+    defaultLists.allTasks.tasks = allTasks;
+    defaultLists.inbox.tasks = allTasks;
 }
 
 

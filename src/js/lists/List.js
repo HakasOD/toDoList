@@ -50,13 +50,13 @@ class List {
     }
 
     getTaskById(id) {
-        for(task in this._tasks) {
+        for(const task of this._tasks) {
             if(id === task.id) {
                 return task;
             }
         }
 
-        console.error(`Task with id: ${taskId} was not found`);
+        console.error(`Task with id: ${id} was not found`);
         return null;
     }
 
