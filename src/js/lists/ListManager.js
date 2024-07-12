@@ -5,19 +5,25 @@ import defaultLists from "./DefaultLists";
 let userLists = [];
 
 function listFound(listName) {
-    if(!isDefaultList) return false;
+    if(isDefaultList(listName)) return true;
     
-    if(!isUserList) return false;
+    if(isUserList(listName)) return true;
 
-    return true;
+    return false;
 }
 
-function isDefaultList(listName) {
-    if(defaultLists[listName.toLowerCase()] === undefined) {
-        return false;
+function isDefaultList(listName) {      /// BUG wont be able to find camelCase ones
+    listName = listName.toLowerCase();
+
+    for(const listKey in defaultLists) {
+        let defaultListName = defaultLists[listKey].name.replaceAll(" ", "").toLowerCase()
+
+        if(defaultListName === listName){
+            return true;
+        }
     }
-    
-    return true;
+
+    return false;
 }
 
 function isUserList(listName) {

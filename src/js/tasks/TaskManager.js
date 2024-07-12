@@ -3,7 +3,7 @@ import defaultLists from "../lists/DefaultLists";
 
 let allTasks = [];
 
-function getTasks() {
+function getAllTasks() {
     return allTasks;
 }
 
@@ -101,6 +101,11 @@ function deleteCompletedTasks() {
     updateDefaultLists();
 }
 
+function deleteAllTasks() {
+    allTasks = [];
+    updateDefaultLists();
+}
+
 // Default list management
 function updateDefaultLists() {
     defaultLists.today.tasks = allTasks;
@@ -111,7 +116,7 @@ function updateDefaultLists() {
 
 
 export default {
-    getTasks,
+    getAllTasks,
     getActiveTasks,
     getCompletedTasks,
     createTask,
@@ -128,5 +133,6 @@ export default {
     getIsCompleted,
     toggleIsCompleted,
     deleteTask,
-    deleteCompletedTasks
+    deleteCompletedTasks,
+    deleteAllTasks
 }
