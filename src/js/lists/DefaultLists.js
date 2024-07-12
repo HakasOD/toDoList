@@ -1,4 +1,5 @@
 import List from "./List";
+import { isToday, differenceInDays } from "date-fns";
 
 class TodayList extends List {
     constructor(tasks = []) {
@@ -6,38 +7,22 @@ class TodayList extends List {
     }
 
     get tasks() {
-        return this._tasks.filter(task => this.isToday(task.dueDate));
+        return this._tasks.filter(task => isToday(task.dueDate));
     }
 
 
     set tasks(tasks) {
-        this._tasks = tasks.filter(task => this.isToday(task.dueDate));
+        this._tasks = tasks.filter(task => isToday(task.dueDate));
     }
 
     // Tasks date must be the current day
     addTask(task) {
-        let todaysDate = new Date();
-
-        if(todaysDate.toDateString !== task.dueDate.toDateString) {
-            console.error("Date of task my be the current day to add to TodayList")
+        if(!isToday(task.dueDate)) {
+            console.error("Date of task must be the current day to add to TodayList")
             return null;
         }
 
         super.addTask(task);
-    }
-
-    isToday(date) {
-        if(date === null) return;
-
-        console.log(date)
-        if(!(date instanceof Date)) {
-            console.error("date must be instance of Date");
-            return;
-        }
-
-        const today = new Date();
-
-        return today.toDateString() === date.toDateString();
     }
 }
 
@@ -72,11 +57,13 @@ class UpcomingList extends List {
         }
 
         const today = new Date();
+        const difference = differenceInDays(date, today)
 
-        const weekFromToday = new Date(today);
-        weekFromToday.setDate(today.getDate() + 7);
+        if(difference >= 0 && difference <= 7) {
+            return true;
+        }
 
-        return date >= today && date <= weekFromToday;
+        return false;
     }
 }
 
@@ -102,7 +89,7 @@ class InboxList extends List {
     }
 
     set tasks(tasks) {
-        this._tasks = tasks.filter(task => this.isTaskPartOfUserLists(task));
+        this._tasks = tasks.filter(task => !(this.isTaskPartOfUserLists(task)));
     }
 
     set userLists(userLists) {

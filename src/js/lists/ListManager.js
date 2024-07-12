@@ -88,12 +88,16 @@ function addTaskToList(listName, task) {
     const list = getListByName(listName);
 
     list.push(task);    // Maybe problem with it not being same obj??
+
+    updateInboxList();
 }
 
 function removeTaskFromList(listName, task) {
     const list = getListByName(listName);
 
     list.splice(list.indexOf(task), 1);
+
+    updateInboxList();
 }
 
 // Change list indexs in userLists
@@ -101,6 +105,8 @@ function changeUserListIndex(originalIndex, targetIndex) {
     const targetList = userLists[originalIndex];
     userLists.splice(originalIndex, 1);
     userLists.splice(targetIndex, 1);
+
+    updateInboxList();
 }
 
 // Functions to sort userLists 
@@ -120,5 +126,6 @@ export default {
     createList,
     deleteList,
     addTaskToList,
-    removeTaskFromList
+    removeTaskFromList,
+    changeUserListIndex
 };

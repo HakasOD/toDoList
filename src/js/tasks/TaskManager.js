@@ -62,6 +62,7 @@ function setDescription(discription, id) {
 
 function setDueDate(dueDate, id) {
     getTaskById(id).dueDate = dueDate;
+    updateDefaultLists();
 }
 
 function setPriority(priority, id) {
@@ -70,6 +71,7 @@ function setPriority(priority, id) {
 
 function toggleIsCompleted(id) {
     getTaskById(id).toggleIsCompleted();
+    updateDefaultLists();
 }
 
 // Task Manegement
@@ -79,6 +81,8 @@ function createTask(title) {
     allTasks.push(task);
 
     updateDefaultLists();
+
+    return task;
 }
 
 function deleteTask(id) {
