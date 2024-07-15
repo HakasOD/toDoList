@@ -13,9 +13,9 @@ import "./css/sidebar.css";
 
 TaskManager.createTask("omg");
 TaskManager.createTask("wow");
-TaskManager.createTask("incredible");
+const incredible = TaskManager.createTask("incredible");
 
-
+TaskManager.setDueDate(new Date(), incredible.id);
 
 // Check if inbox works with userLists
 

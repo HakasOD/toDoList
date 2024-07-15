@@ -8,8 +8,11 @@ const upcomingBtn = sidebarDiv.querySelector(".upcoming-list-btn");
 const allTasksBtn = sidebarDiv.querySelector(".all-tasks-list-btn");
 const inboxBtn = sidebarDiv.querySelector(".inbox-list-btn");
 
-const createTaskBtn = sidebarDiv.querySelector(".create-task");
-const createListBtn = sidebarDiv.querySelector(".create-list");
+// Create task module 
+const createTaskBtn = sidebarDiv.querySelector(".create-task-btn");
+
+// Create list module
+const createListBtn = sidebarDiv.querySelector(".create-list-btn");
 
 //TODO: userlists
 //TODO: create tasks 
@@ -30,14 +33,12 @@ upcomingBtn.addEventListener("click", onUpcomingBtnClick);
 function onAllTasksBtnClick() {
     todo.clear();
     todo.renderAllTasksList();
-    console.log("all tasks clicked")
 }
 allTasksBtn.addEventListener("click", onAllTasksBtnClick);
 
 function onInboxBtnClick() {
     todo.clear();
     todo.renderInboxList();
-    console.log("in inbox btn click")
 }
 inboxBtn.addEventListener("click", onInboxBtnClick);
 

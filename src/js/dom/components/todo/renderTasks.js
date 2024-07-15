@@ -1,5 +1,7 @@
 import TaskManager from "../../../tasks/TaskManager";
 
+
+//TODO: Edit task
 //TODO: remove task button
 //TODO: Make top and bottom div of each task. Top includes title and editing. Bottom includes date & userList if default list.
 function renderArrayOfTasks(taskArray, parentElement) {
@@ -49,7 +51,5 @@ function renderTaskDueDate(taskId, parentElement) {
 
     parentElement.appendChild(dueDateDiv);
 }
-
-// Edit task
 
 export default renderArrayOfTasks;
