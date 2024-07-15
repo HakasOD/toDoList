@@ -31,6 +31,10 @@ function getTitle(id) {
     return getTaskById(id).title;
 }
 
+function getId(task) {
+    return task.id;
+}
+
 function getDescription(id) {
     return getTaskById(id).description;
 }
@@ -126,6 +130,7 @@ export default {
     setDueDate,
     setPriority,
     getTitle,
+    getId,
     getDescription,
     getDueDate,
     getLocation,

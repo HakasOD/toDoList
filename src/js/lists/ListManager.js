@@ -1,6 +1,7 @@
 import Task from "../tasks/Task";
 import List from "./List";
 import defaultLists from "./DefaultLists";
+import TaskManager from "../tasks/TaskManager";
 
 let userLists = [];
 
@@ -12,7 +13,7 @@ function listFound(listName) {
     return false;
 }
 
-function isDefaultList(listName) {      /// BUG wont be able to find camelCase ones
+function isDefaultList(listName) {      
     listName = listName.toLowerCase();
 
     for(const listKey in defaultLists) {
@@ -48,6 +49,7 @@ function getDefaultLists() {
     return defaultLists;
 }
 
+
 function getListByName(listName) {
     if(!listFound(listName)) return;
 
@@ -57,6 +59,13 @@ function getListByName(listName) {
 
     return defaultLists[listName];
 }
+
+function getListTasks(listName) {
+    const list = getListByName(listName);
+
+    return list.tasks;
+}
+
 
 function createList(listName) {
     if(listFound(listName)) {
@@ -73,7 +82,7 @@ function createList(listName) {
 
 // Not sure if deletes all tasks within list???
 function deleteList(listName) {
-    if(isDefaultList()) {
+    if(isDefaultList(listName)) {
         console.error("Cannot delete a default list");
         return;
     }
@@ -86,14 +95,15 @@ function deleteList(listName) {
 }
 
 function addTaskToList(listName, task) {
-    if(!listFound()) {
+    if(!listFound(listName)) {
         console.error("List not found");
         return;
     }
 
     const list = getListByName(listName);
 
-    list.push(task);    // Maybe problem with it not being same obj??
+    console.log(typeof list)
+    list.addTask(task);    
 
     updateInboxList();
 }
@@ -101,19 +111,27 @@ function addTaskToList(listName, task) {
 function removeTaskFromList(listName, task) {
     const list = getListByName(listName);
 
-    list.splice(list.indexOf(task), 1);
+    list.tasks.splice(list.tasks.indexOf(task), 1);
 
     updateInboxList();
 }
 
+// FIXME: Element not changing index
 // Change list indexs in userLists
 function changeUserListIndex(originalIndex, targetIndex) {
-    const targetList = userLists[originalIndex];
-    userLists.splice(originalIndex, 1);
-    userLists.splice(targetIndex, 1);
+    const placeHolder = {};
 
+    const movingList = userLists[originalIndex];
+    userLists.splice(originalIndex, 1, placeHolder);
+    userLists.splice(targetIndex, 0, movingList);
+
+    userLists.splice(userLists.indexOf(placeHolder), 1);
+    console.log(userLists)
     updateInboxList();
 }
+
+// Change task index
+
 
 // Functions to sort userLists 
 
@@ -129,6 +147,7 @@ export default {
     getUserLists, 
     getDefaultLists,
     getListByName,
+    getListTasks,
     createList,
     deleteList,
     addTaskToList,

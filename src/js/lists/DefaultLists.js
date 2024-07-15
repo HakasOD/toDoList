@@ -81,7 +81,7 @@ class InboxList extends List {
     }
 
     get tasks() {
-        return this.tasks.filter(task => !this.isTaskPartOfUserLists(task));
+        return this._tasks.filter(task => !(this.isTaskPartOfUserLists(task)));
     }
 
     get userLists() {
