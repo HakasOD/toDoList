@@ -1,3 +1,4 @@
+import renderCreateTaskForm from "./todo/newTaskForm";
 import todo from "./todo/todo";
 
 const sidebarDiv = document.querySelector("#sidebar");
@@ -9,6 +10,8 @@ const allTasksBtn = sidebarDiv.querySelector(".all-tasks-list-btn");
 const inboxBtn = sidebarDiv.querySelector(".inbox-list-btn");
 
 // Create task module 
+const createTaskDialog = sidebarDiv.querySelector(".create-task-dialog");
+renderCreateTaskForm(createTaskDialog);
 const createTaskBtn = sidebarDiv.querySelector(".create-task-btn");
 
 // Create list module
@@ -41,4 +44,9 @@ function onInboxBtnClick() {
     todo.renderInboxList();
 }
 inboxBtn.addEventListener("click", onInboxBtnClick);
+
+function onCreateTaskBtnClick() {
+    createTaskDialog.showModal();
+}
+createTaskBtn.addEventListener("click", onCreateTaskBtnClick);
 

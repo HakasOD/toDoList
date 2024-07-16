@@ -1,16 +1,20 @@
+import TaskManager from "../../../tasks/TaskManager";
+
 function renderCreateTaskForm(dialogElement) {
     const createTaskForm = document.createElement("form");
+    createTaskForm.method = "dialog";
 
     renderNameInput(createTaskForm);
     renderDescriptionInput(createTaskForm);
     renderDueDateInput(createTaskForm);
     //renderPriortySelect(createTaskForm)
+    renderCreateTaskBtn(createTaskForm, dialogElement);
     renderCloseBtn(createTaskForm, dialogElement);
 
-    moduleElement.appendChild(createTaskForm);
+    dialogElement.appendChild(createTaskForm);
 }
 
-function renderNameInput(dialogElement) {
+function renderNameInput(parentElement) {
     //TODO: add required to name
     const taskNameInput = document.createElement("input");
 
@@ -55,28 +59,46 @@ function renderPriortySelect(parentElement) {
     priority4.value = "priority4";
 }
 
-function renderCreateTaskBtn(parentElement) {
+function renderCreateTaskBtn(parentElement, dialogElement) {
     const createTaskBtn = document.createElement("button");
     createTaskBtn.innerText = "Create";
+    createTaskBtn.type = "submit";
 
-    createTaskBtn.addEventListener("click", onCreateTaskBtnClick);
+    createTaskBtn.addEventListener("click", () => onCreateTaskBtnClick(parentElement));
 
     parentElement.appendChild(createTaskBtn);
 }
-
-function onCreateTaskBtnClick(){} //TODO: complete funciton
 
 function renderCloseBtn(parentElement, dialogElement) {
     const closeBtn = document.createElement("button");
     closeBtn.innerText = "Close";
 
     closeBtn.addEventListener("click", () => {
-        dialogElement.close();
+        onCloseBtnClick(dialogElement, parentElement);
     })
 
     parentElement.appendChild(closeBtn);
 }
 
+ //TODO: complete funciton
+ function onCreateTaskBtnClick(formElement){
+    const name = formElement.querySelector("#task-name").value;
+    const description = formElement.querySelector("#description").value;
+    const dueDate = formElement.querySelector("#due-date").value; 
+
+    TaskManager.createTask(name);
+    clearForm(formElement);
+    
+}
+
+function onCloseBtnClick(dialogElement, formElement) {
+    dialogElement.close();
+    clearForm(formElement);
+}
+
+function clearForm(formElement) {
+    formElement.reset();
+}
 
 
 export default renderCreateTaskForm;
