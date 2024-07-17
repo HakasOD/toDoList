@@ -1,4 +1,5 @@
 import ListManager from "../../../lists/ListManager";
+import Task from "../../../tasks/Task";
 import TaskManager from "../../../tasks/TaskManager";
 import todo from "./todo";
 
@@ -86,11 +87,19 @@ function renderCloseBtn(parentElement, dialogElement) {
  function onCreateTaskBtnClick(formElement){
     const name = formElement.querySelector("#task-name").value;
     const description = formElement.querySelector("#description").value;
-    const dueDate = formElement.querySelector("#due-date").value; 
+    const dueDateString = formElement.querySelector("#due-date").value; 
+    const dueDate = new Date(dueDateString);
+    
 
-    TaskManager.createTask(name);
+    const task = TaskManager.createTask(name);
+    const taskId = TaskManager.getId(task);
+
+    TaskManager.setDescription(description, taskId);
+    TaskManager.setDueDate(dueDate, taskId);
+
     clearForm(formElement);
     
+    // Reload the list currently being displayed
     todo.reloadSelectedList();
         
 }

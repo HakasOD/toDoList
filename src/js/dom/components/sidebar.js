@@ -3,12 +3,6 @@ import todo from "./todo/todo";
 
 const sidebarDiv = document.querySelector("#sidebar");
 
-// Default list buttons
-const todayBtn = sidebarDiv.querySelector(".today-list-btn");
-const upcomingBtn = sidebarDiv.querySelector(".upcoming-list-btn");
-const allTasksBtn = sidebarDiv.querySelector(".all-tasks-list-btn");
-const inboxBtn = sidebarDiv.querySelector(".inbox-list-btn");
-
 // Create task module 
 const createTaskDialog = sidebarDiv.querySelector(".create-task-dialog");
 renderCreateTaskForm(createTaskDialog);
@@ -20,30 +14,19 @@ const createListBtn = sidebarDiv.querySelector(".create-list-btn");
 //TODO: userlists
 //TODO: create tasks 
 
-function onTodayBtnClick() {
-    todo.clear();
-    todo.renderTodayList();
-    
-}
-todayBtn.addEventListener("click", onTodayBtnClick);
+const listBtns = sidebarDiv.querySelectorAll(".list");
 
-function onUpcomingBtnClick() {
-    todo.clear();
-    todo.renderUpcomingList();
-}
-upcomingBtn.addEventListener("click", onUpcomingBtnClick);
+listBtns.forEach((listBtn) => {
+   listBtn.addEventListener("click", () => {
+        onListBtnClick(listBtn);
+   }) 
 
-function onAllTasksBtnClick() {
-    todo.clear();
-    todo.renderAllTasksList();
-}
-allTasksBtn.addEventListener("click", onAllTasksBtnClick);
+});
 
-function onInboxBtnClick() {
+function onListBtnClick(listBtn) {
     todo.clear();
-    todo.renderInboxList();
+    todo.renderList(listBtn.textContent);
 }
-inboxBtn.addEventListener("click", onInboxBtnClick);
 
 function onCreateTaskBtnClick() {
     createTaskDialog.showModal();

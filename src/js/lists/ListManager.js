@@ -13,7 +13,7 @@ function listFound(listName) {
 }
 
 function isDefaultList(listName) {  
-    listName = listName.toLowerCase();
+    listName = listName.toLowerCase().replaceAll(" ", "");
 
     for(const listKey in defaultLists) {
         let defaultListName = defaultLists[listKey].name.replaceAll(" ", "").toLowerCase()
@@ -59,7 +59,15 @@ function getListByName(listName) {
         return userLists.find(list => list.name === listName);
     }
 
-    return defaultLists[listName];
+    listName = listName.toLowerCase().replaceAll(" ", "");
+
+    for(const listKey in defaultLists) {
+        let defaultListName = defaultLists[listKey].name.replaceAll(" ", "").toLowerCase();
+        //TODO: fix allTasks
+        if(defaultListName === listName){
+            return defaultLists[listName];
+        }
+    }
 }
 
 function getListTasks(listName) {
@@ -68,6 +76,14 @@ function getListTasks(listName) {
     return list.tasks;
 }
 
+function getUncompletedTasks(listName) {
+    return getListByName(listName).uncompletedTasks;
+}
+
+function getCompletedTasks(listName) {
+    const list = getListByName(listName);
+    return list.completedTasks;
+}
 function setSelectedList(list) {
     selectedList = list;
 }
@@ -153,6 +169,8 @@ export default {
     getDefaultLists,
     getListByName,
     getListTasks,
+    getUncompletedTasks,
+    getCompletedTasks,
     getSelectedList,
     setSelectedList,
     createList,

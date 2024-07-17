@@ -1,5 +1,5 @@
 import TaskManager from "../../../tasks/TaskManager";
-
+import todo from "./todo";
 
 //TODO: Edit task
 //TODO: remove task button
@@ -23,7 +23,7 @@ function renderTask(task, parentElement) {
     parentElement.appendChild(taskDiv);
 }
 
-function renderTaskTitle(taskId, parentElement) {
+function renderTaskTitle(taskId, parentElement) {   
     const titleDiv = document.createElement("div");
     titleDiv.classList.add("title");
 
@@ -31,6 +31,11 @@ function renderTaskTitle(taskId, parentElement) {
     checkBox.type = "checkbox";
     checkBox.id = taskId;
     checkBox.name = "task"
+    checkBox.checked = TaskManager.getIsCompleted(taskId);
+
+    checkBox.addEventListener("change", () => {
+        onCheckboxChange(taskId);
+    })
 
     const label = document.createElement("label");
     label.for = taskId;
@@ -40,6 +45,11 @@ function renderTaskTitle(taskId, parentElement) {
     titleDiv.appendChild(label);
 
     parentElement.appendChild(titleDiv);
+}
+
+function onCheckboxChange(taskId) {
+    TaskManager.toggleIsCompleted(taskId);
+    todo.reloadSelectedList();
 }
 
 function renderTaskDueDate(taskId, parentElement) {

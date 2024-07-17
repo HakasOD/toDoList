@@ -18,6 +18,10 @@ class List {
         return this._tasks;
     }
 
+    get uncompletedTasks() {
+        return this._tasks.filter(task => !task.isCompleted);
+    }
+
     get completedTasks() {
         return this._tasks.filter(task => task.isCompleted);
     }
