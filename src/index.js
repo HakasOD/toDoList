@@ -1,9 +1,6 @@
-import loadImages from "./js/dom/components/nav";
-import Task from "./js/tasks/Task";
-import List from "./js/lists/List";
-import defaultLists from "./js/lists/DefaultLists";
+import loadNavImages from "./js/dom/components/nav";
 import TaskManager from "./js/tasks/TaskManager";
-import ListManager from "./js/lists/ListManager";
+// import ListManager from "./js/lists/ListManager";
 import "./js/dom/components/sidebar";
 
 import "./css/general.css";
@@ -19,4 +16,4 @@ TaskManager.setDueDate(new Date(), incredible.id);
 
 // Check if inbox works with userLists
 
-loadImages();
+loadNavImages();

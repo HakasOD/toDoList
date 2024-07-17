@@ -4,7 +4,6 @@ import Task from "../tasks/Task";
 class List {
     _name = null;
     _tasks = [];
-    _isSelected = false;
 
     constructor(name = null, tasks = []) {
         this._name = name;
@@ -17,10 +16,6 @@ class List {
 
     get tasks() {
         return this._tasks;
-    }
-
-    get isSelected() {
-        return this._isSelected;
     }
 
     get completedTasks() {

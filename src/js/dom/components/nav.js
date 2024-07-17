@@ -5,7 +5,7 @@ import iconMoonSrc from "../../../assets/images/icons/dark-mode-moon.svg";
 import iconQuestionMarkSrc from "../../../assets/images/icons/question-mark.svg";
 import iconMenuSrc from "../../../assets/images/icons/menu.svg";
 
-function loadImages(){
+function loadNavImages(){
     loadRightNavImages();
     loadLeftNavImages();
 }
@@ -47,4 +47,4 @@ function loadLeftNavImages(){
 }
 
 
-export default loadImages;
+export default loadNavImages;

@@ -1,4 +1,6 @@
+import ListManager from "../../../lists/ListManager";
 import TaskManager from "../../../tasks/TaskManager";
+import todo from "./todo";
 
 function renderCreateTaskForm(dialogElement) {
     const createTaskForm = document.createElement("form");
@@ -89,6 +91,8 @@ function renderCloseBtn(parentElement, dialogElement) {
     TaskManager.createTask(name);
     clearForm(formElement);
     
+    todo.reloadSelectedList();
+        
 }
 
 function onCloseBtnClick(dialogElement, formElement) {

@@ -1,8 +1,7 @@
-import Task from "../tasks/Task";
 import List from "./List";
 import defaultLists from "./DefaultLists";
-import TaskManager from "../tasks/TaskManager";
 
+let selectedList = null; // The current list being displayed
 let userLists = [];
 
 function listFound(listName) {
@@ -13,7 +12,7 @@ function listFound(listName) {
     return false;
 }
 
-function isDefaultList(listName) {      
+function isDefaultList(listName) {  
     listName = listName.toLowerCase();
 
     for(const listKey in defaultLists) {
@@ -49,6 +48,9 @@ function getDefaultLists() {
     return defaultLists;
 }
 
+function getSelectedList() {
+    return selectedList;
+}
 
 function getListByName(listName) {
     if(!listFound(listName)) return;
@@ -66,6 +68,9 @@ function getListTasks(listName) {
     return list.tasks;
 }
 
+function setSelectedList(list) {
+    selectedList = list;
+}
 
 function createList(listName) {
     if(listFound(listName)) {
@@ -148,6 +153,8 @@ export default {
     getDefaultLists,
     getListByName,
     getListTasks,
+    getSelectedList,
+    setSelectedList,
     createList,
     deleteList,
     addTaskToList,
