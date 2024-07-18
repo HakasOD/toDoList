@@ -1,4 +1,3 @@
-import List from "../../../lists/List";
 import ListManager from "../../../lists/ListManager";
 import renderArrayOfTasks from "./renderTasks";
 
@@ -10,22 +9,14 @@ function clear() {
     todoDiv.innerHTML = "";
 }
 
-//TODO: I made each of these functions because I want to make each default 
-//list different from a normal one. (at some point in time (probably never))
-
-
 function renderList(listName) {
-    const uncompletedTasks = ListManager.getUncompletedTasks(listName);
-    const completedTasks = ListManager.getCompletedTasks(listName)
-
     const listDiv = document.createElement("div");
 
     listDiv.id = "todo-list";
 
     createListHeading(listName, listDiv);
 
-    renderArrayOfTasks(uncompletedTasks, listDiv);
-    renderArrayOfTasks(completedTasks, listDiv);
+    renderTasks(listName, listDiv);
 
     todoDiv.appendChild(listDiv);
 
@@ -49,7 +40,30 @@ function createListHeading(title, parentElement) {
     parentElement.appendChild(heading);
 }
 
+function renderTasks(listName, parentElement) {
+    // Uncompleted tasks
+    const uncompletedTasks = ListManager.getUncompletedTasks(listName);
 
+    const uncompletedTasksDiv = document.createElement("div");
+    uncompletedTasksDiv.classList.add("uncompleted-tasks");
+
+    renderArrayOfTasks(uncompletedTasks, uncompletedTasksDiv);
+
+    // Completed tasks
+    const completedTasks = ListManager.getCompletedTasks(listName);
+
+    const completedTasksDiv = document.createElement("div");
+    completedTasksDiv.classList.add("completed-tasks");
+
+    const completedText = document.createElement("p");
+    completedText.textContent = "Completed";
+    completedTasksDiv.appendChild(completedText);
+
+    renderArrayOfTasks(completedTasks, completedTasksDiv);
+
+    parentElement.appendChild(uncompletedTasksDiv);
+    parentElement.appendChild(completedTasksDiv);
+}
 
 
 export default {

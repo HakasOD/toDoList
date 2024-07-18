@@ -65,7 +65,7 @@ function getListByName(listName) {
         let defaultListName = defaultLists[listKey].name.replaceAll(" ", "").toLowerCase();
         //TODO: fix allTasks
         if(defaultListName === listName){
-            return defaultLists[listName];
+            return defaultLists[listKey];
         }
     }
 }
