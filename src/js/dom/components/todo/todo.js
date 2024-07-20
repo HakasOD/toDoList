@@ -18,12 +18,20 @@ function renderList(listName) {
 
     renderTasks(listName, listDiv);
 
+    //TODO: add list btn
+    renderAddTaskBtn();
+
+
     todoDiv.appendChild(listDiv);
 
-    const userList = ListManager.getListByName(listName);
-    ListManager.setSelectedList(userList);
+    // Set selected list
+    const list = ListManager.getListByName(listName);
+    ListManager.setSelectedList(list);
 }
 
+function renderAddTaskBtn(parentElement) {
+    
+}
 function reloadSelectedList() {
     let selectedList = ListManager.getSelectedList();
      

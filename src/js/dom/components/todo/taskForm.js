@@ -198,5 +198,6 @@ function clearForm(formElement) {
 
 export default {
     renderCreateTaskForm,
-    renderEditTaskForm
+    renderEditTaskForm, 
+    renderLabel
 }
