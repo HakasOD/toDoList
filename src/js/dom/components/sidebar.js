@@ -1,11 +1,11 @@
-import renderCreateTaskForm from "./todo/newTaskForm";
+import taskForm from "./todo/taskForm";
 import todo from "./todo/todo";
 
 const sidebarDiv = document.querySelector("#sidebar");
 
 // Create task module 
 const createTaskDialog = sidebarDiv.querySelector(".create-task-dialog");
-renderCreateTaskForm(createTaskDialog);
+taskForm.renderCreateTaskForm(createTaskDialog);
 const createTaskBtn = sidebarDiv.querySelector(".create-task-btn");
 
 // Create list module

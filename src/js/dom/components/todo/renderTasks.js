@@ -1,5 +1,8 @@
+import Task from "../../../tasks/Task";
 import TaskManager from "../../../tasks/TaskManager";
 import todo from "./todo";
+import { format } from "date-fns";
+import taskForm from "./taskForm";
 
 //TODO: Edit task
 //TODO: remove task button
@@ -17,16 +20,42 @@ function renderTask(task, parentElement) {
     taskDiv.dataset.id = taskId;
     taskDiv.classList.add("task");
 
-    renderTaskTitle(taskId, taskDiv);
-    renderTaskDueDate(taskId, taskDiv);
+    renderTopDiv(taskId, taskDiv);
+    renderBottomDiv(taskId, taskDiv);
 
     parentElement.appendChild(taskDiv);
 }
 
-function renderTaskTitle(taskId, parentElement) {   
-    const titleDiv = document.createElement("div");
-    titleDiv.classList.add("title");
+function renderTopDiv(taskId, parentElement) {   
+    const topDiv = document.createElement("div");
+    topDiv.classList.add("task-top");
 
+    // Left side
+    renderCheckbox(topDiv, taskId);
+
+    // Right side
+    renderEditBtn(taskId, topDiv);
+    renderDeleteBtn(taskId, topDiv);
+    renderEditTaskDialog(taskId, topDiv);
+
+    parentElement.appendChild(topDiv);
+}
+
+function renderBottomDiv(taskId, parentElement) {
+    const bottomDiv = document.createElement("div");
+    bottomDiv.classList.add("task-bottom");
+
+    // Left side
+    renderDueDate(taskId, bottomDiv);
+
+    // Right side
+    //TODO: project the task belongs to
+    renderProject(bottomDiv);
+
+    parentElement.appendChild(bottomDiv);
+}
+
+function renderCheckbox(parentElement, taskId) {
     const checkBox = document.createElement("input");
     checkBox.type = "checkbox";
     checkBox.id = taskId;
@@ -41,10 +70,63 @@ function renderTaskTitle(taskId, parentElement) {
     label.for = taskId;
     label.innerText = TaskManager.getTitle(taskId);
 
-    titleDiv.appendChild(checkBox);
-    titleDiv.appendChild(label);
+    parentElement.appendChild(checkBox);
+    parentElement.appendChild(label);
+}
 
-    parentElement.appendChild(titleDiv);
+function renderEditBtn(taskId, parentElement) {
+    const editBtn = document.createElement("button");
+
+    editBtn.classList.add("edit-btn");
+    editBtn.textContent = "Edit";
+
+    editBtn.addEventListener("click", () => {
+        onEditBtnClick(taskId, parentElement);
+    })
+
+    parentElement.appendChild(editBtn);
+}
+
+function renderEditTaskDialog(taskId, parentElement) {
+    const dialogElement = document.createElement("dialog");
+    dialogElement.classList.add("edit-task-dialog");
+
+    taskForm.renderEditTaskForm(dialogElement, taskId);
+
+    parentElement.appendChild(dialogElement);
+}
+
+function renderDeleteBtn(taskId, parentElement) {
+    const deleteBtn = document.createElement("button");
+
+    deleteBtn.classList.add("delete-btn");
+    deleteBtn.textContent = "Delete";
+
+    deleteBtn.addEventListener("click", () => {
+        onDeleteBtnClick(taskId);
+    })
+    parentElement.appendChild(deleteBtn);
+}
+
+function renderDueDate(taskId, parentElement) {
+    const dueDateDiv = document.createElement("div");
+    dueDateDiv.classList.add("due-date");
+
+    let dueDate = TaskManager.getDueDate(taskId);
+ 
+    if(dueDate !== null && dueDate instanceof Date && !isNaN(dueDate)) {
+        let formattedDueDate = format(dueDate, "dd/MM/yy");
+        dueDateDiv.innerText = formattedDueDate;
+    }
+
+    parentElement.appendChild(dueDateDiv);
+}
+
+function renderProject(parentElement) {
+    const projectNamePara = document.createElement("p");
+    projectNamePara.textContent = "project";
+
+    parentElement.appendChild(projectNamePara);
 }
 
 function onCheckboxChange(taskId) {
@@ -52,14 +134,19 @@ function onCheckboxChange(taskId) {
     todo.reloadSelectedList();
 }
 
-function renderTaskDueDate(taskId, parentElement) {
-    const dueDateDiv = document.createElement("div");
-    dueDateDiv.classList.add("due-date");
+//TODO: Probably need to delete from list as well
+function onDeleteBtnClick(taskId) {
+    TaskManager.deleteTask(taskId);
+    todo.reloadSelectedList();
+}
 
-    //TODO: date-fns formatting
-    dueDateDiv.innerText = TaskManager.getDueDate(taskId);
+function onEditBtnClick(taskId, parentElement) {
+    const dialogElement = parentElement.querySelector(".edit-task-dialog");
 
-    parentElement.appendChild(dueDateDiv);
+    if(dialogElement.open){
+        dialogElement.close();
+    } else 
+        dialogElement.show();
 }
 
 export default renderArrayOfTasks;

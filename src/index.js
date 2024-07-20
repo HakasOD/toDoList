@@ -2,6 +2,7 @@ import loadNavImages from "./js/dom/components/nav";
 import TaskManager from "./js/tasks/TaskManager";
 // import ListManager from "./js/lists/ListManager";
 import "./js/dom/components/sidebar";
+import todo from "./js/dom/components/todo/todo";
 
 import "./css/general.css";
 import "./css/nav.css";
@@ -17,3 +18,5 @@ TaskManager.setDueDate(new Date(), incredible.id);
 // Check if inbox works with userLists
 
 loadNavImages();
+
+todo.renderList("Inbox");
