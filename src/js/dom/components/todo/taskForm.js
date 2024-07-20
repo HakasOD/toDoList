@@ -3,7 +3,6 @@ import ListManager from "../../../lists/ListManager";
 import Task from "../../../tasks/Task";
 import TaskManager from "../../../tasks/TaskManager";
 import todo from "./todo";
-import { ta } from "date-fns/locale";
 
 
 function renderCreateTaskForm(dialogElement) {
@@ -122,7 +121,7 @@ function renderConfirmChangesBtn(parentElement, taskId) {
 function renderCreateTaskBtn(parentElement, dialogElement) {
     const createTaskBtn = document.createElement("button");
     createTaskBtn.innerText = "Create";
-    createTaskBtn.type = "submit";
+    createTaskBtn.type = "button";
 
     createTaskBtn.addEventListener("click", () => onCreateTaskBtnClick(parentElement));
 

@@ -1,5 +1,6 @@
 import ListManager from "../../../lists/ListManager";
 import renderArrayOfTasks from "./renderTasks";
+import taskForm from "./taskForm";
 
 const todoDiv = document.querySelector("#todos");
 // const createTaskBtns = document.querySelectorAll("") //TODO: Bring up create task form
@@ -16,11 +17,9 @@ function renderList(listName) {
 
     createListHeading(listName, listDiv);
 
+    renderAddTaskBtn(listDiv);
+    
     renderTasks(listName, listDiv);
-
-    //TODO: add list btn
-    renderAddTaskBtn();
-
 
     todoDiv.appendChild(listDiv);
 
@@ -30,7 +29,19 @@ function renderList(listName) {
 }
 
 function renderAddTaskBtn(parentElement) {
+    const addTaskBtn = document.createElement("button");
     
+    const dialogElement = document.createElement("dialog");
+    taskForm.renderCreateTaskForm(dialogElement);
+    
+    addTaskBtn.textContent = "Add Task";
+
+    addTaskBtn.addEventListener("click", () => {
+        dialogElement.show();
+    })
+
+    parentElement.appendChild(addTaskBtn);
+    parentElement.appendChild(dialogElement)
 }
 function reloadSelectedList() {
     let selectedList = ListManager.getSelectedList();
