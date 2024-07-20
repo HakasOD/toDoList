@@ -18,7 +18,7 @@ function renderList(listName) {
     createListHeading(listName, listDiv);
 
     renderAddTaskBtn(listDiv);
-    
+
     renderTasks(listName, listDiv);
 
     todoDiv.appendChild(listDiv);
@@ -33,7 +33,7 @@ function renderAddTaskBtn(parentElement) {
     
     const dialogElement = document.createElement("dialog");
     taskForm.renderCreateTaskForm(dialogElement);
-    
+       
     addTaskBtn.textContent = "Add Task";
 
     addTaskBtn.addEventListener("click", () => {
@@ -43,6 +43,7 @@ function renderAddTaskBtn(parentElement) {
     parentElement.appendChild(addTaskBtn);
     parentElement.appendChild(dialogElement)
 }
+
 function reloadSelectedList() {
     let selectedList = ListManager.getSelectedList();
      

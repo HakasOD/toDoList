@@ -3,6 +3,7 @@ import ListManager from "../../../lists/ListManager";
 import Task from "../../../tasks/Task";
 import TaskManager from "../../../tasks/TaskManager";
 import todo from "./todo";
+import List from "../../../lists/List";
 
 
 function renderCreateTaskForm(dialogElement) {
@@ -122,7 +123,7 @@ function renderCreateTaskBtn(parentElement, dialogElement) {
     const createTaskBtn = document.createElement("button");
     createTaskBtn.innerText = "Create";
     createTaskBtn.type = "button";
-
+    console.log(parentElement)
     createTaskBtn.addEventListener("click", () => onCreateTaskBtnClick(parentElement));
 
     parentElement.appendChild(createTaskBtn);
@@ -169,6 +170,11 @@ function onConfirmChangesBtnClick(formElement, taskId) {
 
     }
 
+    // add task to user list if not default list
+    if(ListManager.selectedListIsUserList()) {
+        ListManager.addTaskToList(ListManager.getSelectedList().name, task);
+    }
+    
     clearForm(formElement);
     
     // Reload the list currently being displayed

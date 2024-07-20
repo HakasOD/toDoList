@@ -162,6 +162,9 @@ function updateInboxList() {
     defaultLists['inbox'].userLists = userLists;
 }
 
+function selectedListIsUserList() {
+    return isUserList(selectedList.name);
+}
 
 export default {
     getAllLists,
@@ -177,5 +180,6 @@ export default {
     deleteList,
     addTaskToList,
     removeTaskFromList,
-    changeUserListIndex
+    changeUserListIndex,
+    selectedListIsUserList
 };
