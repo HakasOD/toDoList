@@ -1,3 +1,4 @@
+import ListManager from "../../lists/ListManager";
 import createListForm from "./createListForm";
 import taskForm from "./todo/taskForm";
 import todo from "./todo/todo";
@@ -27,6 +28,7 @@ listBtns.forEach((listBtn) => {
 function onListBtnClick(listBtn) {
     todo.clear();
     todo.renderList(listBtn.textContent);
+    todo.reloadSelectedList();
 }
 
 function renderUserListBtn(listName, ulElement = userListUl) {

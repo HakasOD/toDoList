@@ -14,6 +14,7 @@ function renderCreateTaskForm(dialogElement) {
     renderDescriptionInput(createTaskForm);
     renderDueDateInput(createTaskForm);
     //renderPriortySelect(createTaskForm)
+    renderProjectSelect(createTaskForm);
     renderCreateTaskBtn(createTaskForm, dialogElement);
     renderCloseBtn(createTaskForm, dialogElement);
 
@@ -109,6 +110,30 @@ function renderPriortySelect(parentElement) {
     priority4.value = "priority4";
 }
 
+function renderProjectSelect(parentElement) {
+    const selectElement = document.createElement("select");
+    selectElement.id = "project-select";
+
+    // Loop through all user lists
+    const userLists = ListManager.getUserLists();
+    for(let userList of userLists) {
+        const option = document.createElement("option");
+
+        option.textContent = userList.name;
+
+        // Check if option is currently selected list
+        let selectedList = ListManager.getSelectedList();
+        if(selectedList.name === userList.name) {
+            option.selected = true;
+        }
+
+        selectElement.appendChild(option);
+    }
+
+    renderLabel(parentElement, "Project", selectElement.id);
+    parentElement.appendChild(selectElement);
+}
+
 function renderConfirmChangesBtn(parentElement, taskId) {
     const confirmChangesBtn = document.createElement("button");
     confirmChangesBtn.textContent = "Confirm Changes";
@@ -123,7 +148,6 @@ function renderCreateTaskBtn(parentElement, dialogElement) {
     const createTaskBtn = document.createElement("button");
     createTaskBtn.innerText = "Create";
     createTaskBtn.type = "button";
-    console.log(parentElement)
     createTaskBtn.addEventListener("click", () => onCreateTaskBtnClick(parentElement));
 
     parentElement.appendChild(createTaskBtn);
