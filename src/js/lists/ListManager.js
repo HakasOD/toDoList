@@ -1,6 +1,7 @@
 import List from "./List";
 import defaultLists from "./DefaultLists";
 import TaskManager from "../tasks/TaskManager";
+import Task from "../tasks/Task";
 
 let selectedList = null; // The current list being displayed
 let userLists = [];
@@ -103,7 +104,6 @@ function createList(listName) {
     updateInboxList();
 }
 
-// Not sure if deletes all tasks within list???
 function deleteList(listName) {
     if(isDefaultList(listName)) {
         console.error("Cannot delete a default list");
@@ -111,6 +111,12 @@ function deleteList(listName) {
     }
 
     const list = getListByName(listName);
+    const listTasks = getListTasks(listName);
+
+    // Delete all tasks in list
+    for(let task of listTasks) {
+        TaskManager.deleteTask(task.id);
+    }
 
     userLists.splice(userLists.indexOf(list), 1);
 
@@ -187,6 +193,7 @@ export default {
     createList,
     deleteList,
     addTaskToList,
+    isUserList,
     removeTaskFromList,
     changeUserListIndex,
     selectedListIsUserList

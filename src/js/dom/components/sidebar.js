@@ -1,3 +1,4 @@
+import List from "../../lists/List";
 import ListManager from "../../lists/ListManager";
 import createListForm from "./createListForm";
 import taskForm from "./todo/taskForm";
@@ -32,15 +33,27 @@ function onListBtnClick(listBtn) {
 }
 
 function renderUserListBtn(listName, ulElement = userListUl) {
-    const list = document.createElement("li");
+    const listDiv = document.createElement("div");
+    listDiv.id = listName;
 
+    const list = document.createElement("li");
     list.textContent = listName;
     
     list.addEventListener("click", () => {
         onListBtnClick(list);
+    });
+
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "Delete";
+
+    deleteBtn.addEventListener("click", () => {
+        onDeleteListBtnClick(listName);
     })
 
-    ulElement.appendChild(list)
+
+    listDiv.appendChild(list);
+    listDiv.appendChild(deleteBtn);
+    ulElement.appendChild(listDiv);
 }
 
 function onCreateTaskBtnClick(dialogElement = createTaskDialog) {
@@ -57,6 +70,17 @@ function onCreateListBtnClick() {
 }
 createListBtn.addEventListener("click", onCreateListBtnClick);
 
+function onDeleteListBtnClick(listName) {
+    ListManager.deleteList(listName);
+
+    const listDiv = document.querySelector(`#${listName}`);
+    listDiv.remove();
+
+    todo.clear();
+    todo.renderList("inbox");
+}
+
 export default {
-    renderUserListBtn
+    renderUserListBtn,
+    onDeleteListBtnClick
 }

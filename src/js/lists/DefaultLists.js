@@ -90,9 +90,6 @@ class InboxList extends List {
 
     set tasks(tasks) {
         this._tasks = tasks.filter(task => {
-            console.log(task)
-            console.log(task.project)
-            console.log(this.isTaskPartOfUserLists(task))
             return !this.isTaskPartOfUserLists(task)
         })
     }
