@@ -13,7 +13,7 @@ function renderCreateTaskForm(dialogElement) {
     renderNameInput(createTaskForm);
     renderDescriptionInput(createTaskForm);
     renderDueDateInput(createTaskForm);
-    //renderPriortySelect(createTaskForm)
+    renderPriortySelect(createTaskForm);
     renderProjectSelect(createTaskForm);
     renderCreateTaskBtn(createTaskForm, dialogElement);
     renderCloseBtn(createTaskForm, dialogElement);
@@ -39,6 +39,8 @@ function renderEditTaskForm(dialogElement, taskId) {
     } else taskDueDate = null
 
     renderDueDateInput(editTaskForm, taskDueDate);
+
+    renderPriortySelect(editTaskForm, TaskManager.getPriority(taskId));
     renderConfirmChangesBtn(editTaskForm, taskId);
     renderCloseBtn(editTaskForm, dialogElement);
 
@@ -95,19 +97,43 @@ function renderDueDateInput(parentElement, dateValue = null) {
     parentElement.appendChild(dueDateInput);
 }
 
-function renderPriortySelect(parentElement) {
-    
-    //TODO: priority
+function renderPriortySelect(parentElement, taskPriority = "Medium") {    
     const prioritySelect = document.createElement("select");
-    const priority1 = document.createElement("option");
-    const priority2 = document.createElement("option");
-    const priority3 = document.createElement("option");
-    const priority4 = document.createElement("option");
+    prioritySelect.id = "priority-select";
 
-    priority1.value = "priority1";
-    priority2.value = "priority2";
-    priority3.value = "priority3";
-    priority4.value = "priority4";
+    renderLabel(parentElement, "Priority", prioritySelect.id);
+
+    const low = document.createElement("option");
+    const medium = document.createElement("option");
+    const high = document.createElement("option");
+
+    low.value = "Low";
+    medium.value = "Medium";
+    high.value = "High";
+    
+    switch (taskPriority) {
+        case low.value:
+            low.selected = true;
+            break;
+        case medium.value:
+            medium.selected = true;
+            break;
+        case high.value: 
+            high.selected = true;
+            break;
+        default:
+            medium.selected = true;
+    }
+
+    low.textContent = "Low";
+    medium.textContent = "Medium";
+    high.textContent = "High";
+
+    prioritySelect.appendChild(low);
+    prioritySelect.appendChild(medium);
+    prioritySelect.appendChild(high);
+
+    parentElement.appendChild(prioritySelect);
 }
 
 function renderProjectSelect(parentElement) {
@@ -188,7 +214,8 @@ function onConfirmChangesBtnClick(formElement, taskId) {
     const dueDateString = formElement.querySelector("#due-date").value; 
     const dueDate = new Date(dueDateString);
     const selectedProject = formElement.querySelector("#project-select").value; 
-   
+    const priority = formElement.querySelector("#priority-select").value; 
+
     const task = TaskManager.createTask(name);
     const taskId = TaskManager.getId(task);
 
@@ -202,6 +229,8 @@ function onConfirmChangesBtnClick(formElement, taskId) {
     if(selectedProject !== "") {
         ListManager.addTaskToList(selectedProject, task);
     }
+
+    TaskManager.setPriority(priority, taskId);
 
     clearForm(formElement);
     

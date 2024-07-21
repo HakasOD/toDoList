@@ -6,7 +6,7 @@ class Task {
     #discription = null;
     #dueDate = null;
     #location = null;
-    #priority = 0;
+    #priority = "Medium";
     #isCompleted = false;
     #project = null;
 

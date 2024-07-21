@@ -146,6 +146,8 @@ function onDeleteBtnClick(taskId) {
 function onEditBtnClick(taskId, parentElement) {
     const dialogElement = parentElement.querySelector(".edit-task-dialog");
 
+    renderEditTaskDialog(taskId, parentElement);
+    
     if(dialogElement.open){
         dialogElement.close();
     } else 
