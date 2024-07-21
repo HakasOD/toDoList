@@ -1,6 +1,7 @@
 import ListManager from "../../lists/ListManager";
 import sidebar from "./sidebar";
 import taskForm from "./todo/taskForm";
+import todo from "./todo/todo";
 
 function renderCreateListForm(dialogElement) {
     const createListForm = document.createElement("form");
@@ -58,6 +59,9 @@ function onCreateListBtnClick(formElement) {
     sidebar.renderUserListBtn(listName);
 
     formElement.reset();
+
+    todo.clear();
+    todo.renderList(listName);
 }
 
 function onCloseBtnClick(formElement, dialogElement) {

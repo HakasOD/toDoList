@@ -5,9 +5,6 @@ import { format } from "date-fns";
 import taskForm from "./taskForm";
 import ListManager from "../../../lists/ListManager";
 
-//TODO: Edit task
-//TODO: remove task button
-//TODO: Make top and bottom div of each task. Top includes title and editing. Bottom includes date & userList if default list.
 function renderArrayOfTasks(taskArray, parentElement) {
     for(const task of taskArray) {
         renderTask(task, parentElement);
@@ -50,7 +47,6 @@ function renderBottomDiv(taskId, parentElement) {
     renderDueDate(taskId, bottomDiv);
 
     // Right side
-    //TODO: project the task belongs to
     renderProject(taskId, bottomDiv);
 
     parentElement.appendChild(bottomDiv);
@@ -125,7 +121,7 @@ function renderDueDate(taskId, parentElement) {
 
 function renderProject(taskId, parentElement) {
     const projectNamePara = document.createElement("p");
-    projectNamePara.textContent = "";
+    projectNamePara.textContent = "None";
     parentElement.appendChild(projectNamePara);
 
     const project = TaskManager.getProject(taskId);
