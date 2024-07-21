@@ -43,10 +43,14 @@ function renderUserListBtn(listName, ulElement = userListUl) {
     ulElement.appendChild(list)
 }
 
-function onCreateTaskBtnClick() {
+function onCreateTaskBtnClick(dialogElement = createTaskDialog) {
+    dialogElement.innerHTML = "";
+    taskForm.renderCreateTaskForm(dialogElement);
     createTaskDialog.showModal();
 }
-createTaskBtn.addEventListener("click", onCreateTaskBtnClick);
+createTaskBtn.addEventListener("click", () => {
+    onCreateTaskBtnClick();
+});
 
 function onCreateListBtnClick() {
     createListDialog.showModal();

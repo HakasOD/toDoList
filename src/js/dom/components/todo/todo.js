@@ -37,6 +37,8 @@ function renderAddTaskBtn(parentElement) {
     addTaskBtn.textContent = "Add Task";
 
     addTaskBtn.addEventListener("click", () => {
+        dialogElement.innerHTML = "";
+        taskForm.renderCreateTaskForm(dialogElement);
         dialogElement.show();
     })
 

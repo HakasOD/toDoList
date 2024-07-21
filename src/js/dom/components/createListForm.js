@@ -51,19 +51,15 @@ function renderCreateListBtn(formElement) {
 }
 
 function onCreateListBtnClick(formElement) {
-
-    console.log(formElement)
     const listName = formElement.querySelector("#list-name").value;
 
     ListManager.createList(listName);
-    console.log(ListManager.getUserLists());
-    //TODO: reload sidebar
 
     sidebar.renderUserListBtn(listName);
 
-
     formElement.reset();
 }
+
 function onCloseBtnClick(formElement, dialogElement) {
     formElement.reset();
     dialogElement.close();

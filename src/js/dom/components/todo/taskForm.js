@@ -114,6 +114,11 @@ function renderProjectSelect(parentElement) {
     const selectElement = document.createElement("select");
     selectElement.id = "project-select";
 
+    const noneOption = document.createElement("option");
+    noneOption.value = "";
+    noneOption.textContent = "None";
+    selectElement.appendChild(noneOption);
+    
     // Loop through all user lists
     const userLists = ListManager.getUserLists();
     for(let userList of userLists) {
@@ -147,7 +152,7 @@ function renderConfirmChangesBtn(parentElement, taskId) {
 function renderCreateTaskBtn(parentElement, dialogElement) {
     const createTaskBtn = document.createElement("button");
     createTaskBtn.innerText = "Create";
-    createTaskBtn.type = "button";
+    createTaskBtn.type = "submit";
     createTaskBtn.addEventListener("click", () => onCreateTaskBtnClick(parentElement));
 
     parentElement.appendChild(createTaskBtn);
@@ -177,7 +182,6 @@ function onConfirmChangesBtnClick(formElement, taskId) {
     todo.reloadSelectedList();
 }
 
- //TODO: complete funciton
  function onCreateTaskBtnClick(formElement){
     const name = formElement.querySelector("#task-name").value;
     const description = formElement.querySelector("#description").value;
