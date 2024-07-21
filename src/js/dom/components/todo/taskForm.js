@@ -118,7 +118,7 @@ function renderProjectSelect(parentElement) {
     noneOption.value = "";
     noneOption.textContent = "None";
     selectElement.appendChild(noneOption);
-    
+
     // Loop through all user lists
     const userLists = ListManager.getUserLists();
     for(let userList of userLists) {
@@ -187,6 +187,7 @@ function onConfirmChangesBtnClick(formElement, taskId) {
     const description = formElement.querySelector("#description").value;
     const dueDateString = formElement.querySelector("#due-date").value; 
     const dueDate = new Date(dueDateString);
+    const selectedProject = formElement.querySelector("#project-select").value; 
    
     const task = TaskManager.createTask(name);
     const taskId = TaskManager.getId(task);
@@ -198,10 +199,10 @@ function onConfirmChangesBtnClick(formElement, taskId) {
 
     }
 
-    // add task to user list if not default list
-    if(ListManager.selectedListIsUserList()) {
-        ListManager.addTaskToList(ListManager.getSelectedList().name, task);
+    if(selectedProject !== "") {
+        ListManager.addTaskToList(selectedProject, task);
     }
+
     
     clearForm(formElement);
     
