@@ -165,7 +165,9 @@ function changeUserListIndex(originalIndex, targetIndex) {
 
 // Keeps userLists array up to date in the inboxList
 function updateInboxList() {
-    defaultLists['inbox'].userLists = userLists;
+    defaultLists['inbox'].tasks = TaskManager.getAllTasks();
+
+    console.log(userLists)
 }
 
 function selectedListIsUserList() {

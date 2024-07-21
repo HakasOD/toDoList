@@ -68,6 +68,7 @@ function onCloseBtnClick(formElement, dialogElement) {
     formElement.reset();
     dialogElement.close();
 }
+
 export default {
     renderCreateListForm
 }

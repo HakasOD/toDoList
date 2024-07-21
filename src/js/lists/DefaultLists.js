@@ -81,7 +81,7 @@ class InboxList extends List {
     }
 
     get tasks() {
-        return this._tasks.filter(task => !(this.isTaskPartOfUserLists(task)));
+        return this._tasks;
     }
 
     get userLists() {
@@ -89,7 +89,12 @@ class InboxList extends List {
     }
 
     set tasks(tasks) {
-        this._tasks = tasks.filter(task => !(this.isTaskPartOfUserLists(task)));
+        this._tasks = tasks.filter(task => {
+            console.log(task)
+            console.log(task.project)
+            console.log(this.isTaskPartOfUserLists(task))
+            return !this.isTaskPartOfUserLists(task)
+        })
     }
 
     set userLists(userLists) {
@@ -98,7 +103,7 @@ class InboxList extends List {
 
     
     isTaskPartOfUserLists(task) {
-        return this._userLists.includes(task);
+        return task.project === null ?  false : true;
     }
 }
 

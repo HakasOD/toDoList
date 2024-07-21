@@ -64,6 +64,9 @@ function createListHeading(title, parentElement) {
 
 function renderTasks(listName, parentElement) {
     // Uncompleted tasks
+
+    console.log(listName)
+    console.log(ListManager.getListTasks(listName));
     const uncompletedTasks = ListManager.getUncompletedTasks(listName);
 
     const uncompletedTasksDiv = document.createElement("div");
