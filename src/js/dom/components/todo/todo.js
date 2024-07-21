@@ -1,4 +1,5 @@
 import ListManager from "../../../lists/ListManager";
+import TaskManager from "../../../tasks/TaskManager";
 import sidebar from "../sidebar";
 import renderArrayOfTasks from "./renderTasks";
 import taskForm from "./taskForm";
@@ -17,7 +18,7 @@ function renderList(listName) {
     listDiv.id = "todo-list";
 
     createListHeading(listName, listDiv);
-
+    renderDeleteAllCompletedTasksBtn(listDiv);
 
     if(ListManager.isUserList(listName)) {
         renderDeleteListBtn(listName, listDiv);
@@ -102,6 +103,17 @@ function renderDeleteListBtn(listName, parentElement) {
     })
 
     parentElement.appendChild(deleteBtn);
+}
+
+function renderDeleteAllCompletedTasksBtn(parentElement) {
+    const deleteAllCompletedTasksBtn = document.createElement("button");
+    deleteAllCompletedTasksBtn.textContent = "Delete completed tasks";
+
+    deleteAllCompletedTasksBtn.addEventListener("click", () => {
+        TaskManager.deleteCompletedTasks();
+        reloadSelectedList();
+    })
+    parentElement.appendChild(deleteAllCompletedTasksBtn);
 }
 
 export default {

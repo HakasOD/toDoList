@@ -48,7 +48,6 @@ function renderEditTaskForm(dialogElement, taskId) {
 }
 
 function renderNameInput(parentElement, inputValue = null) {
-    //TODO: add required to name
     const taskNameInput = document.createElement("input");
 
     taskNameInput.type = "text";
@@ -59,7 +58,6 @@ function renderNameInput(parentElement, inputValue = null) {
         taskNameInput.value = inputValue;
     }
 
-    // Label
     renderLabel(parentElement, "Task Name", taskNameInput.id);
 
     parentElement.appendChild(taskNameInput);
@@ -77,7 +75,6 @@ function renderDescriptionInput(parentElement, inputValue = null) {
         descriptionInput.value = inputValue;
     }
 
-    // Label
     renderLabel(parentElement, "Description", descriptionInput.id); 
     parentElement.appendChild(descriptionInput);
 }
@@ -236,7 +233,6 @@ function onConfirmChangesBtnClick(formElement, taskId) {
     
     // Reload the list currently being displayed
     todo.reloadSelectedList();
-        
 }
 
 function onCloseBtnClick(dialogElement, formElement) {
