@@ -203,7 +203,6 @@ function onConfirmChangesBtnClick(formElement, taskId) {
         ListManager.addTaskToList(selectedProject, task);
     }
 
-    
     clearForm(formElement);
     
     // Reload the list currently being displayed

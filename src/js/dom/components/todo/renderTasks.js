@@ -3,6 +3,7 @@ import TaskManager from "../../../tasks/TaskManager";
 import todo from "./todo";
 import { format } from "date-fns";
 import taskForm from "./taskForm";
+import ListManager from "../../../lists/ListManager";
 
 //TODO: Edit task
 //TODO: remove task button
@@ -50,7 +51,7 @@ function renderBottomDiv(taskId, parentElement) {
 
     // Right side
     //TODO: project the task belongs to
-    renderProject(bottomDiv);
+    renderProject(taskId, bottomDiv);
 
     parentElement.appendChild(bottomDiv);
 }
@@ -122,11 +123,17 @@ function renderDueDate(taskId, parentElement) {
     parentElement.appendChild(dueDateDiv);
 }
 
-function renderProject(parentElement) {
+function renderProject(taskId, parentElement) {
     const projectNamePara = document.createElement("p");
-    projectNamePara.textContent = "project";
-
+    projectNamePara.textContent = "";
     parentElement.appendChild(projectNamePara);
+
+    const project = TaskManager.getProject(taskId);
+    
+    if(project === null) return;
+
+    projectNamePara.textContent = project.name;
+
 }
 
 function onCheckboxChange(taskId) {

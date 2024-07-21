@@ -1,5 +1,6 @@
 import List from "./List";
 import defaultLists from "./DefaultLists";
+import TaskManager from "../tasks/TaskManager";
 
 let selectedList = null; // The current list being displayed
 let userLists = [];
@@ -84,6 +85,7 @@ function getCompletedTasks(listName) {
     const list = getListByName(listName);
     return list.completedTasks;
 }
+
 function setSelectedList(list) {
     selectedList = list;
 }
@@ -126,6 +128,8 @@ function addTaskToList(listName, task) {
     console.log(typeof list)
     list.addTask(task);    
 
+    TaskManager.setProject(list, task.id);
+
     updateInboxList();
 }
 
@@ -134,6 +138,8 @@ function removeTaskFromList(listName, task) {
 
     list.tasks.splice(list.tasks.indexOf(task), 1);
 
+    TaskManager.setProject(null, task.id);
+    
     updateInboxList();
 }
 

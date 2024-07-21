@@ -8,6 +8,7 @@ class Task {
     #location = null;
     #priority = 0;
     #isCompleted = false;
+    #project = null;
 
     constructor(title) {
         this.#title = title;
@@ -42,6 +43,10 @@ class Task {
         return this.#isCompleted;
     }
 
+    get project() {
+        return this.#project
+    }
+
     set title(title) {
         if(title.length < 1) {
             console.error("Title must be at least 1 character");
@@ -71,6 +76,10 @@ class Task {
         this.#priority = priority;
     }
 
+    set project(project) {
+        this.#project = project;
+    }
+    
     toggleIsCompleted() {
         this.#isCompleted = !this.#isCompleted;
     }

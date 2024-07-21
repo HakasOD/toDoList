@@ -55,6 +55,10 @@ function getIsCompleted(id) {
     return getTaskById(id).isCompleted;
 }
 
+function getProject(id) {
+    return getTaskById(id).project;
+}
+
 // Task property setters
 function setTitle(title, id) {
     getTaskById(id).title = title;
@@ -71,6 +75,10 @@ function setDueDate(dueDate, id) {
 
 function setPriority(priority, id) {
     getTaskById(id).priority = priority;
+}
+
+function setProject(project, id) {
+    getTaskById(id).project = project;
 }
 
 function toggleIsCompleted(id) {
@@ -129,8 +137,10 @@ export default {
     setDescription,
     setDueDate,
     setPriority,
+    setProject,
     getTitle,
     getId,
+    getProject,
     getDescription,
     getDueDate,
     getLocation,
