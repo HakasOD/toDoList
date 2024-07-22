@@ -1,3 +1,6 @@
 #sidebar {
-    background-color: aqua;
+    position: relative;
+    
+    background-color: var(--primary-color);
+    box-shadow: 5px 0 10px  rgba(0, 0, 0, 0.5);
 }

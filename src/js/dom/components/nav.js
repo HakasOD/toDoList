@@ -7,7 +7,6 @@ import iconMenuSrc from "../../../assets/images/icons/menu.svg";
 
 function loadNavImages(){
     loadRightNavImages();
-    loadLeftNavImages();
 }
 
 function loadThemeToggleImages(){
@@ -36,15 +35,6 @@ function loadRightNavImages(){
     loadThemeToggleImages();
 }
 
-function loadLeftNavImages(){
-    const leftNavDiv = document.querySelector(".left");
-
-    const iconMenu = createImgFromUrl(iconMenuSrc);
-
-    iconMenu.classList.add("menu");
-
-    leftNavDiv.appendChild(iconMenu);
-}
 
 
 export default loadNavImages;

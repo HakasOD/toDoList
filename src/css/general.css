@@ -1,5 +1,12 @@
 :root[data-theme="light"] {
-    --page-bg: #fff;
+    --page-bg: var(--primary-white);
+    --font-color: #000000;
+    --dull-bg-color: #EFEFEF; 
+    --primary-white: #fff;
+    --primary-color: #ffede1;
+    --secondary-color: #f9fbf2;
+    --accent-color: #afcbff;
+    --bold-color: #0e1c36;
 
 
 

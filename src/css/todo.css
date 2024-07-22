@@ -1,0 +1,9 @@
+#todos {
+    background-color: var(--dull-bg-color);
+}
+
+#todo-list {
+    width:fit-content;
+    margin-inline: auto;
+    margin-top: 5vh;
+}

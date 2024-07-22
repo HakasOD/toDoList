@@ -7,6 +7,7 @@ import todo from "./js/dom/components/todo/todo";
 import "./css/general.css";
 import "./css/nav.css";
 import "./css/sidebar.css";
+import "./css/todo.css";
 
 
 TaskManager.createTask("omg");

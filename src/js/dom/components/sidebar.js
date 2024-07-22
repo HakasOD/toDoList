@@ -3,14 +3,20 @@ import ListManager from "../../lists/ListManager";
 import createListForm from "./createListForm";
 import taskForm from "./todo/taskForm";
 import todo from "./todo/todo";
+import createImgFromUrl from "../assetManager";
+import iconMenuSrc from "../../../assets/images/icons/menu.svg";
 
 const sidebarDiv = document.querySelector("#sidebar");
+const container = sidebarDiv.querySelector(".container");
 const userListUl = sidebarDiv.querySelector(".user-lists");
+
+loadLeftNavImages();
 
 // Create task module 
 const createTaskDialog = sidebarDiv.querySelector(".create-task-dialog");
 taskForm.renderCreateTaskForm(createTaskDialog);
 const createTaskBtn = sidebarDiv.querySelector(".create-task-btn");
+
 
 // Create list module
 const createListDialog = sidebarDiv.querySelector(".create-list-dialog");
@@ -30,6 +36,18 @@ function onListBtnClick(listBtn) {
     todo.clear();
     todo.renderList(listBtn.textContent);
     todo.reloadSelectedList();
+}
+
+
+function loadLeftNavImages(){   
+    const iconMenu = createImgFromUrl(iconMenuSrc);
+
+    iconMenu.classList.add("menu");
+
+    container.appendChild(iconMenu);
+
+    
+    
 }
 
 function renderUserListBtn(listName, ulElement = userListUl) {

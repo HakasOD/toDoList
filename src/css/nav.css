@@ -1,5 +1,38 @@
 nav {
+    position: relative;
+    z-index: 2;
     grid-column: 1 / -1;
     grid-row: 1;
-    background-color: red;
+    background-color: var(--accent-color);
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.493);
+    display: flex;
+    justify-content: space-between;
+}
+
+nav .left {
+    display: flex;
+    align-items: center;
+    margin-left: 2vw;
+}
+
+nav .left .logo .title {
+    font-size: 3rem;
+}
+
+nav .right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1vw;
+    margin-right: 2vw;
+}
+
+nav .right .theme-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 10px;
+    border-radius: 30px;
+    background-color: var(--dull-bg-color);
+    flex: 1;
 }
