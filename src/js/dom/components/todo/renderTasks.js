@@ -48,6 +48,7 @@ function renderBottomDiv(taskId, parentElement) {
 
     // Right side
     renderProject(taskId, bottomDiv);
+    renderPriority(taskId, bottomDiv);
 
     parentElement.appendChild(bottomDiv);
 }
@@ -117,6 +118,17 @@ function renderDueDate(taskId, parentElement) {
     }
 
     parentElement.appendChild(dueDateDiv);
+}
+
+function renderPriority(taskId, parentElement) {
+    const priorityDiv = document.createElement("p");
+    priorityDiv.classList.add("priority");
+
+    let priority = TaskManager.getPriority(taskId);
+
+    priorityDiv.textContent = priority;
+
+    parentElement.appendChild(priorityDiv);
 }
 
 function renderProject(taskId, parentElement) {
