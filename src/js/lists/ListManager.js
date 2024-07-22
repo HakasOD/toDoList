@@ -131,7 +131,6 @@ function addTaskToList(listName, task) {
 
     const list = getListByName(listName);
 
-    console.log(typeof list)
     list.addTask(task);    
 
     TaskManager.setProject(list, task.id);
@@ -159,7 +158,6 @@ function changeUserListIndex(originalIndex, targetIndex) {
     userLists.splice(targetIndex, 0, movingList);
 
     userLists.splice(userLists.indexOf(placeHolder), 1);
-    console.log(userLists)
     updateInboxList();
 }
 
