@@ -48,6 +48,14 @@ body{
     background-color: var(--page-bg);
 } 
 
+ul {
+    list-style-type: none;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
 dialog {
     margin: auto;
     padding: 1em;

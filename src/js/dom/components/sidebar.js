@@ -53,6 +53,7 @@ function loadLeftNavImages(){
 function renderUserListBtn(listName, ulElement = userListUl) {
     const listDiv = document.createElement("div");
     listDiv.id = listName;
+    listDiv.classList.add("list")
 
     const list = document.createElement("li");
     list.textContent = listName;

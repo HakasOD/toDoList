@@ -1,6 +1,45 @@
 #sidebar {
+    display: grid;
+    grid-template-rows: 0fr 1fr 4fr;
     position: relative;
-    
+    padding: 2vh 1.3vw; 
     background-color: var(--primary-color);
     box-shadow: 5px 0 10px  rgba(0, 0, 0, 0.5);
+    gap: 2vh;
+}
+
+#sidebar .container {
+    display: flex;
+    align-items:start;
+    justify-content: space-between;
+}
+
+#sidebar .container .create-task-btn {
+    flex-basis: 75%;
+    height: 4vh;
+    background-color: var(--bold-color);
+    color: var(--primary-white);
+    border: none;
+    /* border-radius: 15px; */
+    font-size: 0.9rem;
+    font-weight: bold;
+} 
+
+#sidebar .lists {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#sidebar .lists .list {
+    display: grid;
+    align-items: center;
+    flex: 1;
+    font-size: large;
+    border-radius: 5px;
+}
+
+#sidebar .lists .list:hover {
+    cursor: pointer;
+    background-color: #00000038;
 }
