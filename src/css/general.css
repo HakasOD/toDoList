@@ -61,7 +61,7 @@ dialog {
     padding: 1em;
 }
 
-.task-form {
+.task-form, .create-list-form {
     width: 30vw;
     max-width: 500px;
     display: flex;
@@ -91,5 +91,9 @@ dialog {
 
 .task-form .button-div button:nth-child(2n) {
     background-color: rgb(191, 19, 19);
-    
+}
+
+.create-list-form input {
+    height: 4vh;
+    font-size: large;
 }

@@ -7,28 +7,36 @@ function renderCreateListForm(dialogElement) {
     const createListForm = document.createElement("form");
     createListForm.method = "dialog";
     createListForm.classList.add("create-list-form");
-
+    createListForm.classList.add("task-form");
+    
     renderNameInput(createListForm);
-    renderCreateListBtn(createListForm);
-    renderCloseBtn(createListForm, dialogElement);
+
+    const buttonDiv = document.createElement("div");
+    buttonDiv.classList.add("button-div");
+
+    renderCreateListBtn(createListForm, buttonDiv);
+    renderCloseBtn(createListForm, dialogElement, buttonDiv);
 
     dialogElement.appendChild(createListForm);
     // In future maybe... : Color, faviorites
 }
 
 function renderNameInput(formElement) {
+    const nameDiv = document.createElement("div");
+    
     const nameInput = document.createElement("input");
 
     nameInput.placeholder = "Shopping";
     nameInput.id = "list-name";
     nameInput.type = "text";
 
-    taskForm.renderLabel(formElement, "List name", nameInput.id);
-    
-    formElement.appendChild(nameInput);
+    taskForm.renderLabel(nameDiv, "List name", nameInput.id);
+   
+    nameDiv.appendChild(nameInput);
+    formElement.appendChild(nameDiv);
 }
 
-function renderCloseBtn(formElement, dialogElement) {
+function renderCloseBtn(formElement, dialogElement, buttonDiv) {
     const closeBtn = document.createElement("button");
 
     closeBtn.textContent = "Close";
@@ -37,10 +45,11 @@ function renderCloseBtn(formElement, dialogElement) {
         onCloseBtnClick(formElement, dialogElement);
     })
 
-    formElement.appendChild(closeBtn);
+    buttonDiv.appendChild(closeBtn);
+    formElement.appendChild(buttonDiv);
 }
 
-function renderCreateListBtn(formElement) {
+function renderCreateListBtn(formElement, buttonDiv) {
     const createListBtn = document.createElement("button");
     createListBtn.textContent = "Create List";
 
@@ -48,7 +57,8 @@ function renderCreateListBtn(formElement) {
         onCreateListBtnClick(formElement);
     })
 
-    formElement.appendChild(createListBtn);
+    buttonDiv.appendChild(createListBtn);
+    formElement.appendChild(buttonDiv);
 }
 
 function onCreateListBtnClick(formElement) {
