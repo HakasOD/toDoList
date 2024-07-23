@@ -14,19 +14,35 @@ function clear() {
 
 function renderList(listName) {
     const listDiv = document.createElement("div");
-
     listDiv.id = "todo-list";
 
-    createListHeading(listName, listDiv);
-    renderDeleteAllCompletedTasksBtn(listDiv);
+    // Create header
+    const listHeader = document.createElement("div");
+    listHeader.classList.add("header");
+    listDiv.appendChild(listHeader);
+
+    // List title & delete list btn
+    const listTitleDiv = document.createElement("div");
+    listTitleDiv.classList.add("list-title-div");
+    
+    listHeader.appendChild(listTitleDiv);
+
+    createListHeading(listName, listTitleDiv);
 
     if(ListManager.isUserList(listName)) {
-        renderDeleteListBtn(listName, listDiv);
+        renderDeleteListBtn(listName, listTitleDiv);
     }
 
-    renderAddTaskBtn(listDiv);
+    renderDeleteAllCompletedTasksBtn(listHeader);
 
-    renderTasks(listName, listDiv);
+    // Tasks
+    const tasksDiv = document.createElement("div");
+    tasksDiv.classList.add("tasks");
+    listDiv.appendChild(tasksDiv);
+
+    renderAddTaskBtn(tasksDiv);
+
+    renderTasks(listName, tasksDiv);
 
     todoDiv.appendChild(listDiv);
 
@@ -37,7 +53,8 @@ function renderList(listName) {
 
 function renderAddTaskBtn(parentElement) {
     const addTaskBtn = document.createElement("button");
-    
+    addTaskBtn.classList.add("add-task-btn");
+
     const dialogElement = document.createElement("dialog");
     taskForm.renderCreateTaskForm(dialogElement);
        
@@ -46,7 +63,7 @@ function renderAddTaskBtn(parentElement) {
     addTaskBtn.addEventListener("click", () => {
         dialogElement.innerHTML = "";
         taskForm.renderCreateTaskForm(dialogElement);
-        dialogElement.show();
+        dialogElement.showModal();
     })
 
     parentElement.appendChild(addTaskBtn);
@@ -75,22 +92,25 @@ function renderTasks(listName, parentElement) {
 
     const uncompletedTasksDiv = document.createElement("div");
     uncompletedTasksDiv.classList.add("uncompleted-tasks");
+    uncompletedTasksDiv.classList.add("tasks-container");
 
     renderArrayOfTasks(uncompletedTasks, uncompletedTasksDiv);
+
+    // Completed heading
+    const completedText = document.createElement("h3");
+    completedText.textContent = "Completed";
 
     // Completed tasks
     const completedTasks = ListManager.getCompletedTasks(listName);
 
     const completedTasksDiv = document.createElement("div");
     completedTasksDiv.classList.add("completed-tasks");
-
-    const completedText = document.createElement("p");
-    completedText.textContent = "Completed";
-    completedTasksDiv.appendChild(completedText);
+    completedTasksDiv.classList.add("tasks-container");
 
     renderArrayOfTasks(completedTasks, completedTasksDiv);
 
     parentElement.appendChild(uncompletedTasksDiv);
+    parentElement.appendChild(completedText);
     parentElement.appendChild(completedTasksDiv);
 }
 

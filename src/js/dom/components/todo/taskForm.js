@@ -9,14 +9,24 @@ import List from "../../../lists/List";
 function renderCreateTaskForm(dialogElement) {
     const createTaskForm = document.createElement("form");
     createTaskForm.method = "dialog";
+    createTaskForm.classList.add("task-form");
 
+    const createTaskHeader = document.createElement("h1");
+    createTaskHeader.textContent = "New Task";
+    createTaskForm.appendChild(createTaskHeader);
+    
     renderNameInput(createTaskForm);
     renderDescriptionInput(createTaskForm);
     renderDueDateInput(createTaskForm);
     renderPriortySelect(createTaskForm);
     renderProjectSelect(createTaskForm);
-    renderCreateTaskBtn(createTaskForm, dialogElement);
-    renderCloseBtn(createTaskForm, dialogElement);
+    
+    const buttonDiv = document.createElement("div");
+    buttonDiv.classList.add("button-div");
+
+    renderCreateTaskBtn(createTaskForm, buttonDiv);
+    renderCloseBtn(createTaskForm, buttonDiv, dialogElement);
+    createTaskForm.appendChild(buttonDiv);
 
     dialogElement.appendChild(createTaskForm);
 }
@@ -24,6 +34,7 @@ function renderCreateTaskForm(dialogElement) {
 function renderEditTaskForm(dialogElement, taskId) {
     const editTaskForm = document.createElement("form");
     editTaskForm.method = "dialog";
+    editTaskForm.classList.add("task-form");
 
     const editTaskFormTitle = document.createElement("h2");
     editTaskFormTitle.textContent = "Edit Task";
@@ -41,13 +52,21 @@ function renderEditTaskForm(dialogElement, taskId) {
     renderDueDateInput(editTaskForm, taskDueDate);
 
     renderPriortySelect(editTaskForm, TaskManager.getPriority(taskId));
-    renderConfirmChangesBtn(editTaskForm, taskId);
-    renderCloseBtn(editTaskForm, dialogElement);
 
+    const buttonDiv = document.createElement("div");
+    buttonDiv.classList.add("button-div");
+
+    renderConfirmChangesBtn(editTaskForm, buttonDiv, taskId);
+    renderCloseBtn(editTaskForm, buttonDiv, dialogElement);
+
+    editTaskForm.appendChild(buttonDiv);
     dialogElement.appendChild(editTaskForm);
 }
 
 function renderNameInput(parentElement, inputValue = null) {
+    const taskNameDiv = document.createElement("div");
+    taskNameDiv.classList.add("task-name-div");
+
     const taskNameInput = document.createElement("input");
 
     taskNameInput.type = "text";
@@ -58,13 +77,17 @@ function renderNameInput(parentElement, inputValue = null) {
         taskNameInput.value = inputValue;
     }
 
-    renderLabel(parentElement, "Task Name", taskNameInput.id);
+    renderLabel(taskNameDiv, "Task Name", taskNameInput.id);
 
-    parentElement.appendChild(taskNameInput);
+    taskNameDiv.appendChild(taskNameInput);
+    parentElement.appendChild(taskNameDiv);
 
 }
 
 function renderDescriptionInput(parentElement, inputValue = null) {
+    const descriptionDiv = document.createElement("div");
+    descriptionDiv.classList.add("description-div");
+
     const descriptionInput = document.createElement("input");
 
     descriptionInput.type = "text";
@@ -75,11 +98,16 @@ function renderDescriptionInput(parentElement, inputValue = null) {
         descriptionInput.value = inputValue;
     }
 
-    renderLabel(parentElement, "Description", descriptionInput.id); 
-    parentElement.appendChild(descriptionInput);
+    renderLabel(descriptionDiv, "Description", descriptionInput.id); 
+
+    descriptionDiv.appendChild(descriptionInput);
+    parentElement.appendChild(descriptionDiv);
 }
 
 function renderDueDateInput(parentElement, dateValue = null) {
+    const dueDateDiv = document.createElement("div");
+    dueDateDiv.classList.add("due-date-div");
+
     const dueDateInput = document.createElement("input");
 
     dueDateInput.type = "date";
@@ -89,16 +117,20 @@ function renderDueDateInput(parentElement, dateValue = null) {
         dueDateInput.value = dateValue;
     } 
 
-    renderLabel(parentElement, "Due Date", dueDateInput.id);
+    renderLabel(dueDateDiv, "Due Date", dueDateInput.id);
 
-    parentElement.appendChild(dueDateInput);
+    dueDateDiv.appendChild(dueDateInput);
+    parentElement.appendChild(dueDateDiv);
 }
 
 function renderPriortySelect(parentElement, taskPriority = "Medium") {    
+    const priorityDiv = document.createElement("div");
+    priorityDiv.classList.add("priority-div");
+
     const prioritySelect = document.createElement("select");
     prioritySelect.id = "priority-select";
 
-    renderLabel(parentElement, "Priority", prioritySelect.id);
+    renderLabel(priorityDiv, "Priority", prioritySelect.id);
 
     const low = document.createElement("option");
     const medium = document.createElement("option");
@@ -130,10 +162,14 @@ function renderPriortySelect(parentElement, taskPriority = "Medium") {
     prioritySelect.appendChild(medium);
     prioritySelect.appendChild(high);
 
-    parentElement.appendChild(prioritySelect);
+    priorityDiv.appendChild(prioritySelect);
+    parentElement.appendChild(priorityDiv);
 }
 
 function renderProjectSelect(parentElement) {
+    const selectDiv = document.createElement("div");
+    selectDiv.classList.add("select-div");
+    
     const selectElement = document.createElement("select");
     selectElement.id = "project-select";
 
@@ -158,8 +194,9 @@ function renderProjectSelect(parentElement) {
         selectElement.appendChild(option);
     }
 
-    renderLabel(parentElement, "Project", selectElement.id);
-    parentElement.appendChild(selectElement);
+    renderLabel(selectDiv, "Project", selectElement.id);
+    selectDiv.appendChild(selectElement);
+    parentElement.appendChild(selectDiv)
 }
 
 function renderConfirmChangesBtn(parentElement, taskId) {
@@ -172,16 +209,17 @@ function renderConfirmChangesBtn(parentElement, taskId) {
     parentElement.appendChild(confirmChangesBtn);
 }
 
-function renderCreateTaskBtn(parentElement, dialogElement) {
+function renderCreateTaskBtn(parentElement, buttonDiv) {
     const createTaskBtn = document.createElement("button");
     createTaskBtn.innerText = "Create";
     createTaskBtn.type = "submit";
     createTaskBtn.addEventListener("click", () => onCreateTaskBtnClick(parentElement));
 
-    parentElement.appendChild(createTaskBtn);
+    buttonDiv.appendChild(createTaskBtn);
+    parentElement.appendChild(buttonDiv);
 }
 
-function renderCloseBtn(parentElement, dialogElement) {
+function renderCloseBtn(parentElement, buttonDiv, dialogElement) {
     const closeBtn = document.createElement("button");
     closeBtn.innerText = "Close";
 
@@ -189,7 +227,8 @@ function renderCloseBtn(parentElement, dialogElement) {
         onCloseBtnClick(dialogElement, parentElement);
     })
 
-    parentElement.appendChild(closeBtn);
+    buttonDiv.appendChild(closeBtn);
+    parentElement.appendChild(buttonDiv)
 }
 
 function onConfirmChangesBtnClick(formElement, taskId) {
