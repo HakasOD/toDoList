@@ -64,7 +64,7 @@ function renderAddTaskBtn(parentElement) {
     addTaskBtn.addEventListener("click", () => {
         dialogElement.innerHTML = "";
         taskForm.renderCreateTaskForm(dialogElement);
-        dialogElement.show();
+        dialogElement.showModal();
     })
 
     parentElement.appendChild(addTaskBtn);

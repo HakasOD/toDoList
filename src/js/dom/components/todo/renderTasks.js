@@ -189,7 +189,7 @@ function onEditBtnClick(event, taskId, parentElement) {
     if(dialogElement.open){
         dialogElement.close();
     } else 
-        dialogElement.show();
+        dialogElement.showModal();
 }
 
 function onTaskClick(taskId) {
