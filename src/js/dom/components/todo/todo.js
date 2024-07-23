@@ -42,7 +42,6 @@ function renderList(listName) {
 
     renderAddTaskBtn(tasksDiv);
 
-
     renderTasks(listName, tasksDiv);
 
     todoDiv.appendChild(listDiv);

@@ -52,3 +52,36 @@ dialog {
     margin: auto;
     padding: 1em;
 }
+
+.task-form {
+    width: 30vw;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(10px, 2vh, 50px);
+}
+
+.task-form > div {
+    display: flex;
+    flex-direction: column;
+}
+
+.task-form .button-div {
+    gap: 10px;
+}
+
+.task-form .button-div button {
+    border: none;
+    height: 5vh;
+    font-size: large;
+    color: var(--primary-white);
+}
+
+.task-form .button-div button:first-child {
+    background-color: var(--bold-color);
+}
+
+.task-form .button-div button:nth-child(2n) {
+    background-color: rgb(191, 19, 19);
+    
+}

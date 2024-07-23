@@ -81,8 +81,11 @@
     background-color: var(--accent-color);
 }
 
-#todo-list .task .task-top .edit-task-dialog {
-    max-width: 75%;
+
+#todo-list .task .task-top .left {
+    display: flex;
+    gap: 5px;
+    font-size: large;
 }
 
 #todo-list .task .task-bottom {
@@ -95,4 +98,16 @@
     display: flex;
     gap: 10px;
     font-size: small;
+}
+
+.low-priority {
+    color: green;
+}
+
+.medium-priority {
+    color: black;
+}
+
+.high-priority {
+    color: red;
 }

@@ -151,6 +151,19 @@ function renderPriority(taskId, parentElement) {
 
     priorityDiv.textContent = priority;
 
+    // Apply colour to relative priority 
+    switch(priority) {
+        case "Low":
+            priorityDiv.classList.add("low-priority");
+            break;
+        case "Medium":
+            priorityDiv.classList.add("medium-priority");
+            break;
+        case "High":
+            priorityDiv.classList.add("high-priority");
+            break;
+    }
+
     parentElement.appendChild(priorityDiv);
 }
 
