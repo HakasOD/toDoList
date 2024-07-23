@@ -18,6 +18,10 @@ function renderTask(task, parentElement) {
     taskDiv.dataset.id = taskId;
     taskDiv.classList.add("task");
 
+    taskDiv.addEventListener("click", () => {
+        onTaskClick(taskId);
+    })
+
     renderTopDiv(taskId, taskDiv);
     renderBottomDiv(taskId, taskDiv);
 
@@ -29,12 +33,21 @@ function renderTopDiv(taskId, parentElement) {
     topDiv.classList.add("task-top");
 
     // Left side
-    renderCheckbox(topDiv, taskId);
+    const leftDiv = document.createElement("div");
+    leftDiv.classList.add("left");
+
+    renderCheckbox(leftDiv, taskId);
 
     // Right side
-    renderEditBtn(taskId, topDiv);
-    renderDeleteBtn(taskId, topDiv);
-    renderEditTaskDialog(taskId, topDiv);
+    const rightDiv = document.createElement("div");
+    rightDiv.classList.add("right");
+
+    renderEditBtn(taskId, rightDiv);
+    renderDeleteBtn(taskId, rightDiv);
+    renderEditTaskDialog(taskId, rightDiv);
+
+    topDiv.appendChild(leftDiv);
+    topDiv.appendChild(rightDiv);
 
     parentElement.appendChild(topDiv);
 }
@@ -44,11 +57,20 @@ function renderBottomDiv(taskId, parentElement) {
     bottomDiv.classList.add("task-bottom");
 
     // Left side
-    renderDueDate(taskId, bottomDiv);
+    const leftDiv = document.createElement("div");
+    leftDiv.classList.add("left");
+
+    renderDueDate(taskId, leftDiv);
 
     // Right side
-    renderProject(taskId, bottomDiv);
-    renderPriority(taskId, bottomDiv);
+    const rightDiv = document.createElement("div");
+    rightDiv.classList.add("right");
+
+    renderPriority(taskId, rightDiv);
+    renderProject(taskId, rightDiv);
+
+    bottomDiv.appendChild(leftDiv);
+    bottomDiv.appendChild(rightDiv);
 
     parentElement.appendChild(bottomDiv);
 }
@@ -78,8 +100,8 @@ function renderEditBtn(taskId, parentElement) {
     editBtn.classList.add("edit-btn");
     editBtn.textContent = "Edit";
 
-    editBtn.addEventListener("click", () => {
-        onEditBtnClick(taskId, parentElement);
+    editBtn.addEventListener("click", (event) => {
+        onEditBtnClick(event, taskId, parentElement);
     })
 
     parentElement.appendChild(editBtn);
@@ -100,8 +122,8 @@ function renderDeleteBtn(taskId, parentElement) {
     deleteBtn.classList.add("delete-btn");
     deleteBtn.textContent = "Delete";
 
-    deleteBtn.addEventListener("click", () => {
-        onDeleteBtnClick(taskId);
+    deleteBtn.addEventListener("click", (event) => {
+        onDeleteBtnClick(event, taskId);
     })
     parentElement.appendChild(deleteBtn);
 }
@@ -109,6 +131,7 @@ function renderDeleteBtn(taskId, parentElement) {
 function renderDueDate(taskId, parentElement) {
     const dueDateDiv = document.createElement("div");
     dueDateDiv.classList.add("due-date");
+    dueDateDiv.textContent = "No due date"
 
     let dueDate = TaskManager.getDueDate(taskId);
  
@@ -133,7 +156,7 @@ function renderPriority(taskId, parentElement) {
 
 function renderProject(taskId, parentElement) {
     const projectNamePara = document.createElement("p");
-    projectNamePara.textContent = "None";
+    projectNamePara.textContent = "No project";
     parentElement.appendChild(projectNamePara);
 
     const project = TaskManager.getProject(taskId);
@@ -150,12 +173,15 @@ function onCheckboxChange(taskId) {
 }
 
 //TODO: Probably need to delete from list as well
-function onDeleteBtnClick(taskId) {
+function onDeleteBtnClick(event, taskId) {
+    event.stopPropagation();
     TaskManager.deleteTask(taskId);
     todo.reloadSelectedList();
 }
 
-function onEditBtnClick(taskId, parentElement) {
+function onEditBtnClick(event, taskId, parentElement) {
+    event.stopPropagation();
+
     const dialogElement = parentElement.querySelector(".edit-task-dialog");
 
     renderEditTaskDialog(taskId, parentElement);
@@ -164,6 +190,11 @@ function onEditBtnClick(taskId, parentElement) {
         dialogElement.close();
     } else 
         dialogElement.show();
+}
+
+function onTaskClick(taskId) {
+    onCheckboxChange(taskId);
+
 }
 
 export default renderArrayOfTasks;

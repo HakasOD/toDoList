@@ -6,4 +6,89 @@
     width:fit-content;
     margin-inline: auto;
     margin-top: 5vh;
+    min-width: 500px
+}
+
+#todo-list .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#todo-list .header button {
+    border: none;
+    background-color: var(--accent-color);
+    padding: 3px 8px;
+    border-radius: 20px;
+}
+
+#todo-list .header .list-title-div {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+#todo-list .tasks {
+    margin-top: 2vh;
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+}
+
+#todo-list .tasks .add-task-btn {
+    /* margin-bottom: 10px; */
+    border: none;
+    color: var(--primary-white);
+    background-color: var(--bold-color);
+    border-radius: 20px;
+    height: clamp(25px, 4vh, 35px);
+    
+}
+
+#todo-list .tasks .tasks-container {
+    display: grid;
+    gap: 10px;
+}
+
+#todo-list .tasks .tasks-container .task {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    background-color: rgba(0, 0, 0, 0.107);
+    padding: 5px 10px;
+    border-radius: 10px;
+}
+
+#todo-list .tasks .tasks-container .task:hover {
+    cursor: pointer;
+}
+
+#todo-list .task .task-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#todo-list .task .task-top .right {
+    display: flex;
+    gap: 10px;
+}
+#todo-list .task .task-top .right > button {
+    width: 50px;   
+    padding: 2px 4px;
+    border-radius: 10px;
+    border: none;
+    background-color: var(--accent-color);
+}
+
+#todo-list .task .task-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#todo-list .task .task-bottom .right{
+    display: flex;
+    gap: 10px;
+    font-size: small;
 }

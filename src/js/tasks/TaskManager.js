@@ -101,9 +101,9 @@ function createTask(title) {
 function deleteTask(id) {
     for(let i = 0; i < allTasks.length; i++) {
         if(allTasks[i].id !== id) {
-            console.log("whah")
             continue;
         }
+
         //remove from project
         if(allTasks[i].project !== null) {
             ListManager.removeTaskFromList(allTasks[i].project.name, allTasks[i]);
