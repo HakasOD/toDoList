@@ -58,15 +58,15 @@ function renderUserListBtn(listName, ulElement = userListUl) {
     const list = document.createElement("li");
     list.textContent = listName;
     
-    list.addEventListener("click", () => {
+    listDiv.addEventListener("click", () => {
         onListBtnClick(list);
     });
 
     const deleteBtn = document.createElement("button");
     deleteBtn.textContent = "Delete";
 
-    deleteBtn.addEventListener("click", () => {
-        onDeleteListBtnClick(listName);
+    deleteBtn.addEventListener("click", (event) => {
+        onDeleteListBtnClick(listName, event);
     })
 
 
@@ -89,7 +89,9 @@ function onCreateListBtnClick() {
 }
 createListBtn.addEventListener("click", onCreateListBtnClick);
 
-function onDeleteListBtnClick(listName) {
+function onDeleteListBtnClick(listName, event) {
+    event.stopPropagation();
+
     ListManager.deleteList(listName);
 
     const listDiv = document.querySelector(`#${listName}`);
