@@ -199,14 +199,15 @@ function renderProjectSelect(parentElement) {
     parentElement.appendChild(selectDiv)
 }
 
-function renderConfirmChangesBtn(parentElement, taskId) {
+function renderConfirmChangesBtn(parentElement, buttonDiv, taskId) {
     const confirmChangesBtn = document.createElement("button");
     confirmChangesBtn.textContent = "Confirm Changes";
     confirmChangesBtn.type = "button"
 
     confirmChangesBtn.addEventListener("click", () => onConfirmChangesBtnClick(parentElement, taskId))
 
-    parentElement.appendChild(confirmChangesBtn);
+    buttonDiv.appendChild(confirmChangesBtn);
+    parentElement.appendChild(buttonDiv);
 }
 
 function renderCreateTaskBtn(parentElement, buttonDiv) {

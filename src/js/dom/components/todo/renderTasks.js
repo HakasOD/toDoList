@@ -115,7 +115,7 @@ function renderEditTaskDialog(taskId, parentElement) {
     dialogElement.addEventListener("click", (event) => {
         event.stopPropagation();
     })
-    
+
     taskForm.renderEditTaskForm(dialogElement, taskId);
 
     parentElement.appendChild(dialogElement);
