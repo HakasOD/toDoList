@@ -111,6 +111,11 @@ function renderEditTaskDialog(taskId, parentElement) {
     const dialogElement = document.createElement("dialog");
     dialogElement.classList.add("edit-task-dialog");
 
+    // Stops click bubbling up 
+    dialogElement.addEventListener("click", (event) => {
+        event.stopPropagation();
+    })
+    
     taskForm.renderEditTaskForm(dialogElement, taskId);
 
     parentElement.appendChild(dialogElement);
@@ -207,7 +212,6 @@ function onEditBtnClick(event, taskId, parentElement) {
 
 function onTaskClick(taskId) {
     onCheckboxChange(taskId);
-
 }
 
 export default renderArrayOfTasks;
