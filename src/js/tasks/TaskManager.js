@@ -1,6 +1,7 @@
 import Task from "./Task";
 import defaultLists from "../lists/DefaultLists";
 import ListManager from "../lists/ListManager";
+import storage from "../storage";
 
 let allTasks = [];
 
@@ -95,6 +96,8 @@ function createTask(title) {
 
     updateDefaultLists();
 
+    storage.storeTask(task);
+
     return task;
 }
 
@@ -109,6 +112,8 @@ function deleteTask(id) {
             ListManager.removeTaskFromList(allTasks[i].project.name, allTasks[i]);
         }
 
+        storage.removeItem(allTasks[i].name);
+
         allTasks.splice(i, 1);
 
     }
@@ -121,6 +126,11 @@ function deleteCompletedTasks() {
         if(task.project !== null && task.isCompleted) {
             ListManager.removeTaskFromList(task.project.name, task);
         }
+
+        if(task.isCompleted) {
+            storage.removeItem(task.name);
+        }
+
         return !task.isCompleted
     });
 
@@ -128,6 +138,10 @@ function deleteCompletedTasks() {
 }
 
 function deleteAllTasks() {
+    for(task of allTasks) {
+        storage.removeItem(task.name);
+    }
+    
     allTasks = [];
     updateDefaultLists();
 }
