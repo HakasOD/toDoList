@@ -12,13 +12,11 @@ function storeUserList(userList) {
 }
 
 function storeTask(task) {
-    localStorage.setItem(task.title, JSON.stringify(task));
+    localStorage.setItem(task.id , JSON.stringify(task));
 }
 
-
-
-function removeItem(name) {
-    localStorage.removeItem(name);
+function removeItem(task) {
+    localStorage.removeItem(task.id);
 }
 
 export default {

@@ -63,29 +63,40 @@ function getProject(id) {
 
 // Task property setters
 function setTitle(title, id) {
-    task = getTaskById(id);
+    let task = getTaskById(id);
     task.title = title;
+    storage.storeTask(task);
 }
 
 function setDescription(discription, id) {
-    getTaskById(id).description = discription;
+    let task = getTaskById(id);
+    task.discription = discription;
+    storage.storeTask(task);
 }
 
 function setDueDate(dueDate, id) {
-    getTaskById(id).dueDate = dueDate;
+    let task = getTaskById(id);
+    task.dueDate = dueDate;
+    storage.storeTask(task);
     updateDefaultLists();
 }
 
 function setPriority(priority, id) {
-    getTaskById(id).priority = priority;
+    let task = getTaskById(id);
+    task.priority = priority;
+    storage.storeTask(task);
 }
 
 function setProject(project, id) {
-    getTaskById(id).project = project;
+    let task = getTaskById(id);
+    task.project = project;
+    storage.storeTask(task);
 }
 
 function toggleIsCompleted(id) {
-    getTaskById(id).toggleIsCompleted();
+    let task = getTaskById(id);
+    task.toggleIsCompleted();
+    storage.storeTask(task);
     updateDefaultLists();
 }
 
@@ -113,7 +124,7 @@ function deleteTask(id) {
             ListManager.removeTaskFromList(allTasks[i].project.name, allTasks[i]);
         }
 
-        storage.removeItem(allTasks[i].title);
+        storage.removeItem(allTasks[i]);
 
         allTasks.splice(i, 1);
 
@@ -129,7 +140,7 @@ function deleteCompletedTasks() {
         }
 
         if(task.isCompleted) {
-            storage.removeItem(task.title);
+            storage.removeItem(task);
         }
 
         return !task.isCompleted
@@ -140,7 +151,7 @@ function deleteCompletedTasks() {
 
 function deleteAllTasks() {
     for(task of allTasks) {
-        storage.removeItem(task.title);
+        storage.removeItem(task);
     }
     
     allTasks = [];
