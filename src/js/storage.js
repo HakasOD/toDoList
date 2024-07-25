@@ -15,6 +15,8 @@ function storeTask(task) {
     localStorage.setItem(task.title, JSON.stringify(task));
 }
 
+
+
 function removeItem(name) {
     localStorage.removeItem(name);
 }

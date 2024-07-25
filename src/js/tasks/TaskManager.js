@@ -63,7 +63,8 @@ function getProject(id) {
 
 // Task property setters
 function setTitle(title, id) {
-    getTaskById(id).title = title;
+    task = getTaskById(id);
+    task.title = title;
 }
 
 function setDescription(discription, id) {
@@ -112,7 +113,7 @@ function deleteTask(id) {
             ListManager.removeTaskFromList(allTasks[i].project.name, allTasks[i]);
         }
 
-        storage.removeItem(allTasks[i].name);
+        storage.removeItem(allTasks[i].title);
 
         allTasks.splice(i, 1);
 
@@ -128,7 +129,7 @@ function deleteCompletedTasks() {
         }
 
         if(task.isCompleted) {
-            storage.removeItem(task.name);
+            storage.removeItem(task.title);
         }
 
         return !task.isCompleted
@@ -139,7 +140,7 @@ function deleteCompletedTasks() {
 
 function deleteAllTasks() {
     for(task of allTasks) {
-        storage.removeItem(task.name);
+        storage.removeItem(task.title);
     }
     
     allTasks = [];
