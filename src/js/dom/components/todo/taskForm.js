@@ -238,7 +238,7 @@ function onConfirmChangesBtnClick(formElement, taskId) {
     const dueDateString = formElement.querySelector("#due-date").value; 
     const dueDate = new Date(dueDateString);
     const priority = formElement.querySelector("#priority-select").value;
-
+    
     TaskManager.setTitle(name, taskId);
     TaskManager.setDescription(description, taskId);
     TaskManager.setDueDate(dueDate, taskId);

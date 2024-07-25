@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 class Task {
     #id;
     #title = null;
-    #discription = null;
+    #description = null;
     #dueDate = null;
     #location = null;
     #priority = "Medium";
@@ -23,8 +23,8 @@ class Task {
         return this.#title;
     }
 
-    get discription() {
-        return this.#discription;
+    get description() {
+        return this.#description;
     }
 
     get dueDate() {
@@ -56,8 +56,8 @@ class Task {
         this.#title = title;        
     }
 
-    set discription(discription) {
-        this.#discription = discription
+    set description(description) {
+        this.#description = description
     }
 
     set dueDate(dueDate) {
@@ -88,7 +88,7 @@ class Task {
         return {
             title: this.#title,
             id: this.#id,
-            discription: this.#discription,
+            discription: this.#description,
             dueDate: this.#dueDate,
             priority: this.#priority,
             project: this.#project,
@@ -99,7 +99,7 @@ class Task {
     static fromJSON(obj) {
         let instance = new this(obj.title);
         
-        instance.#discription = obj.discription;
+        instance.#description = obj.discription;
         instance.#dueDate = obj.dueDate;
         instance.#id = obj.id;
         instance.#isCompleted = obj.isCompleted;

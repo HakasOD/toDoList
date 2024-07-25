@@ -68,9 +68,9 @@ function setTitle(title, id) {
     storage.storeTask(task);
 }
 
-function setDescription(discription, id) {
+function setDescription(description, id) {
     let task = getTaskById(id);
-    task.discription = discription;
+    task.description = description;
     storage.storeTask(task);
 }
 
