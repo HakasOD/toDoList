@@ -124,7 +124,7 @@ function deleteTask(id) {
             ListManager.removeTaskFromList(allTasks[i].project.name, allTasks[i]);
         }
 
-        storage.removeItem(allTasks[i]);
+        storage.removeTask(allTasks[i]);
 
         allTasks.splice(i, 1);
 
@@ -140,7 +140,7 @@ function deleteCompletedTasks() {
         }
 
         if(task.isCompleted) {
-            storage.removeItem(task);
+            storage.removeTask(task);
         }
 
         return !task.isCompleted
@@ -151,7 +151,7 @@ function deleteCompletedTasks() {
 
 function deleteAllTasks() {
     for(task of allTasks) {
-        storage.removeItem(task);
+        storage.removeTask(task);
     }
     
     allTasks = [];

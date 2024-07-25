@@ -15,13 +15,18 @@ function storeTask(task) {
     localStorage.setItem(task.id , JSON.stringify(task));
 }
 
-function removeItem(task) {
+function removeTask(task) {
     localStorage.removeItem(task.id);
+}
+
+function removeList(list) {
+    localStorage.removeItem(list.name);
 }
 
 export default {
     isStorageEmpty,
     storeUserList,
     storeTask,
-    removeItem
+    removeTask,
+    removeList
 }

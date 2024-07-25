@@ -2,6 +2,7 @@ import List from "./List";
 import defaultLists from "./DefaultLists";
 import TaskManager from "../tasks/TaskManager";
 import Task from "../tasks/Task";
+import storage from "../storage";
 
 let selectedList = null; // The current list being displayed
 let userLists = [];
@@ -101,6 +102,8 @@ function createList(listName) {
 
     userLists.push(userList);
 
+    storage.storeUserList(userList);
+
     updateInboxList();
 }
 
@@ -119,6 +122,8 @@ function deleteList(listName) {
     }
 
     userLists.splice(userLists.indexOf(list), 1);
+
+    storage.removeList(list);
 
     updateInboxList();
 }
@@ -170,8 +175,6 @@ function changeUserListIndex(originalIndex, targetIndex) {
 // Keeps userLists array up to date in the inboxList
 function updateInboxList() {
     defaultLists['inbox'].tasks = TaskManager.getAllTasks();
-
-    console.log(userLists)
 }
 
 function selectedListIsUserList() {
