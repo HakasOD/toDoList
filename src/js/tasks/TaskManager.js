@@ -170,8 +170,13 @@ function updateDefaultLists() {
 function fromJSON(taskJson) {
     let task = new Task(taskJson.title);
     
+    task.id = taskJson.id;
     task.description = taskJson.discription;
-    task.dueDate = new Date(taskJson.dueDate);
+    if(taskJson.dueDate === null) {
+        task.dueDate = null;
+    } else {
+        task.dueDate = new Date(taskJson.dueDate);
+    }
     task.isCompleted = taskJson.isCompleted;
     task.project = taskJson.project;
     task.priority = taskJson.priority;

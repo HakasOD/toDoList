@@ -12,11 +12,7 @@ import "./css/todo.css";
 import storage from "./js/storage";
 
 
-TaskManager.createTask("omg");
-TaskManager.createTask("wow");
-const incredible = TaskManager.createTask("incredible");
 
-TaskManager.setDueDate(new Date(), incredible.id);
 
 // Check if inbox works with userLists
 

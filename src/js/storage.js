@@ -34,8 +34,8 @@ function restoreItems() {
 
         if(Object.hasOwn(item, "id")) {
             console.log(item)
-            
-            let task = TaskManager.fromJSON(item);
+
+            TaskManager.fromJSON(item);
             
         }
 

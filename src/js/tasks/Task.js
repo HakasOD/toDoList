@@ -47,6 +47,10 @@ class Task {
         return this.#project
     }
 
+    set id(id) {
+        this.#id = id;
+    }
+    
     set title(title) {
         if(title.length < 1) {
             console.error("Title must be at least 1 character");
@@ -81,7 +85,7 @@ class Task {
     }
 
     set isCompleted(isCompleted) {
-        this.#isCompleted = isCompleted;
+        this.#isCompleted = isCompleted;    
     }
     
     toggleIsCompleted() {
