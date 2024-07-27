@@ -1,3 +1,5 @@
+import Task from "./tasks/Task";
+import TaskManager from "./tasks/TaskManager";
 
 function isStorageEmpty() {
     if(localStorage.length < 1) {
@@ -23,10 +25,31 @@ function removeList(list) {
     localStorage.removeItem(list.name);
 }
 
+
+function restoreItems() {
+    for(let i = 0; i < localStorage.length; i++) {
+        let itemJson = localStorage.getItem(localStorage.key(i));
+        
+        let item = JSON.parse(itemJson);
+
+        if(Object.hasOwn(item, "id")) {
+            console.log(item)
+            
+            let task = TaskManager.fromJSON(item);
+            
+        }
+
+
+
+        
+    }
+}
+
 export default {
     isStorageEmpty,
     storeUserList,
     storeTask,
     removeTask,
-    removeList
+    removeList,
+    restoreItems
 }

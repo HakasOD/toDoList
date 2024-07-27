@@ -167,6 +167,21 @@ function updateDefaultLists() {
 }
 
 
+function fromJSON(taskJson) {
+    let task = new Task(taskJson.title);
+    
+    task.description = taskJson.discription;
+    task.dueDate = new Date(taskJson.dueDate);
+    task.isCompleted = taskJson.isCompleted;
+    task.project = taskJson.project;
+    task.priority = taskJson.priority;
+
+    allTasks.push(task);
+    updateDefaultLists();
+        
+    return task;
+}
+
 export default {
     getAllTasks,
     getActiveTasks,
@@ -189,5 +204,6 @@ export default {
     toggleIsCompleted,
     deleteTask,
     deleteCompletedTasks,
-    deleteAllTasks
+    deleteAllTasks,
+    fromJSON
 }

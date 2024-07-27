@@ -79,6 +79,10 @@ class Task {
     set project(project) {
         this.#project = project;
     }
+
+    set isCompleted(isCompleted) {
+        this.#isCompleted = isCompleted;
+    }
     
     toggleIsCompleted() {
         this.#isCompleted = !this.#isCompleted;
@@ -96,18 +100,6 @@ class Task {
         }
     }
 
-    static fromJSON(obj) {
-        let instance = new this(obj.title);
-        
-        instance.#description = obj.discription;
-        instance.#dueDate = obj.dueDate;
-        instance.#id = obj.id;
-        instance.#isCompleted = obj.isCompleted;
-        instance.#project = obj.project;
-        instance.#priority = obj.priority;
-
-        return instance;
-    }
 }
 
 export default Task
