@@ -24,7 +24,7 @@ function removeTask(task) {
 }
 
 function removeList(list) {
-    localStorage.removeItem(list.name);
+    localStorage.removeItem(list.id);
 }
 
 function restoreItems() {
@@ -39,6 +39,24 @@ function restoreItems() {
             TaskManager.fromJSON(item);
         }
 
+    }
+
+    // Add tasks back to their relevent projects
+    for(let i = 0; i < localStorage.length; i++) {
+        let itemJson = localStorage.getItem(localStorage.key(i));
+        let item = JSON.parse(itemJson);
+
+        // if it is task
+        if(Object.hasOwn(item, "projectId")) {
+            let projectId = item.projectId;
+            let taskId = item.id;
+            let task = TaskManager.getTaskById(taskId);
+
+            let userLists = ListManager.getUserLists();
+            let correspondingList = userLists.find((userList) => userList.id === projectId);
+
+            ListManager.addTaskToList(correspondingList.name, task);
+        }
     }
 }
 
