@@ -55,7 +55,10 @@ function restoreItems() {
             let userLists = ListManager.getUserLists();
             let correspondingList = userLists.find((userList) => userList.id === projectId);
 
-            ListManager.addTaskToList(correspondingList.name, task);
+            if(correspondingList !== undefined){
+                ListManager.addTaskToList(correspondingList.name, task);
+            }
+            
         }
     }
 }
