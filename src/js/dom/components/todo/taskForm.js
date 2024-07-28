@@ -215,6 +215,7 @@ function renderCreateTaskBtn(parentElement, buttonDiv) {
     const createTaskBtn = document.createElement("button");
     createTaskBtn.innerText = "Create";
     createTaskBtn.type = "submit";
+    
     createTaskBtn.addEventListener("click", () => onCreateTaskBtnClick(parentElement));
 
     buttonDiv.appendChild(createTaskBtn);

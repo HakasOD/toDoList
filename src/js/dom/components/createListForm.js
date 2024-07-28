@@ -29,6 +29,7 @@ function renderNameInput(formElement) {
     nameInput.placeholder = "Shopping";
     nameInput.id = "list-name";
     nameInput.type = "text";
+    nameInput.required = true;
 
     taskForm.renderLabel(nameDiv, "List name", nameInput.id);
    
@@ -52,7 +53,7 @@ function renderCloseBtn(formElement, dialogElement, buttonDiv) {
 function renderCreateListBtn(formElement, buttonDiv) {
     const createListBtn = document.createElement("button");
     createListBtn.textContent = "Create List";
-
+    
     createListBtn.addEventListener("click", () => {
         onCreateListBtnClick(formElement);
     })
