@@ -1,9 +1,7 @@
 import { format } from "date-fns";
 import ListManager from "../../../lists/ListManager";
-import Task from "../../../tasks/Task";
 import TaskManager from "../../../tasks/TaskManager";
 import todo from "./todo";
-import List from "../../../lists/List";
 
 
 function renderCreateTaskForm(dialogElement) {
@@ -184,12 +182,15 @@ function renderProjectSelect(parentElement) {
         const option = document.createElement("option");
 
         option.textContent = userList.name;
-
+      
         // Check if option is currently selected list
         let selectedList = ListManager.getSelectedList();
-        if(selectedList.name === userList.name) {
-            option.selected = true;
+        if(selectedList !== null) {
+            if(selectedList.name === userList.name) {
+                option.selected = true;
+            }
         }
+    
 
         selectElement.appendChild(option);
     }

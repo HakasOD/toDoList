@@ -99,7 +99,6 @@ class Task {
             discription: this.#description,
             dueDate: this.#dueDate,
             priority: this.#priority,
-            project: this.#project,
             isCompleted: this.#isCompleted
         }
     }

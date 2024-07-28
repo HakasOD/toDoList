@@ -1,8 +1,8 @@
 import List from "./List";
 import defaultLists from "./DefaultLists";
 import TaskManager from "../tasks/TaskManager";
-import Task from "../tasks/Task";
 import storage from "../storage";
+import sidebar from "../dom/components/sidebar";
 
 let selectedList = null; // The current list being displayed
 let userLists = [];
@@ -140,6 +140,7 @@ function addTaskToList(listName, task) {
 
     TaskManager.setProject(list, task.id);
 
+
     updateInboxList();
 }
 
@@ -181,6 +182,17 @@ function selectedListIsUserList() {
     return isUserList(selectedList.name);
 }
 
+function fromJson(listJson) {
+    let list = new List(listJson.name);
+
+    list.tasks = listJson.tasks;
+    list.id = listJson.id;
+    userLists.push(list);
+
+    sidebar.renderUserListBtn(list.name);
+    updateInboxList();
+}
+
 export default {
     getAllLists,
     getUserLists, 
@@ -197,5 +209,6 @@ export default {
     isUserList,
     removeTaskFromList,
     changeUserListIndex,
-    selectedListIsUserList
+    selectedListIsUserList,
+    fromJson
 };

@@ -1,5 +1,6 @@
 // Holds tasks 
 import Task from "../tasks/Task";
+import { v4 as uuidv4 } from "uuid";
 
 class List {
     _name = null;
@@ -8,6 +9,7 @@ class List {
     constructor(name = null, tasks = []) {
         this._name = name;
         this._tasks = tasks;
+        this.id = uuidv4();
     }
 
     get name() {
@@ -90,6 +92,14 @@ class List {
 
     sortByFurthestDueDate() {
         this._tasks.sortByClosestDueDate().reverse();
+    }
+
+    toJSON() {
+        return {
+            name: this._name,
+            id: this.id,
+            tasks: this.tasks
+        }
     }
 }
 

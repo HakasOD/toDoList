@@ -1,4 +1,3 @@
-import List from "../../lists/List";
 import ListManager from "../../lists/ListManager";
 import createListForm from "./createListForm";
 import taskForm from "./todo/taskForm";

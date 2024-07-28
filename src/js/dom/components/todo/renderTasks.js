@@ -1,9 +1,8 @@
-import Task from "../../../tasks/Task";
 import TaskManager from "../../../tasks/TaskManager";
 import todo from "./todo";
 import { format } from "date-fns";
 import taskForm from "./taskForm";
-import ListManager from "../../../lists/ListManager";
+
 
 function renderArrayOfTasks(taskArray, parentElement) {
     for(const task of taskArray) {

@@ -178,7 +178,7 @@ function fromJSON(taskJson) {
         task.dueDate = new Date(taskJson.dueDate);
     }
     task.isCompleted = taskJson.isCompleted;
-    task.project = taskJson.project;
+    task.project = null;
     task.priority = taskJson.priority;
 
     allTasks.push(task);
